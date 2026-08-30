@@ -7,17 +7,20 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  schema?: Record<string, any> | Array<Record<string, any>>;
 }
 
 const {
   title,
   description,
-  ogImage = "/images/og.png",
+  ogImage = "/images/og-home.png",
+  schema,
 } = Astro.props;
 
 const siteUrl = Astro.site ?? "https://thebionicbuilder.com";
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
 const canonicalUrl = new URL(pathname, siteUrl).href;
+const fullOgImageUrl = new URL(ogImage, siteUrl).href;
 ---
 
 <!doctype html>
@@ -33,12 +36,26 @@ const canonicalUrl = new URL(pathname, siteUrl).href;
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={fullOgImageUrl} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@deydercintron" />
+    <meta name="twitter:creator" content="@deydercintron" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+    <meta name="twitter:image" content={fullOgImageUrl} />
+    {schema && (
+      <script
+        type="application/ld+json"
+        is:inline
+        set:html={JSON.stringify(
+          Array.isArray(schema)
+            ? { "@context": "https://schema.org", "@graph": schema }
+            : { "@context": "https://schema.org", ...schema }
+        )}
+      />
+    )}
   </head>
   <body>
     <Nav />

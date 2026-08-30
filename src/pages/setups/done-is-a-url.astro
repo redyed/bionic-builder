@@ -2,11 +2,35 @@
 import Layout from "../../layouts/Layout.astro";
 import Figure from "../../components/Figure.astro";
 import EmailBlock from "../../components/EmailBlock.astro";
+
+const schema = {
+  "@type": "TechArticle",
+  "headline": "Done Is a URL: The Four-Day Build of Tracked Vocals",
+  "description": "Every setup used to run the shop: jobs, handoffs, what breaks, and what never gets handed to a bot. №1: the four-day build of Tracked Vocals.",
+  "image": "https://thebionicbuilder.com/images/og-setup-1.png",
+  "datePublished": "2026-08-01",
+  "dateModified": "2026-08-30",
+  "inLanguage": "en",
+  "url": "https://thebionicbuilder.com/setups/done-is-a-url",
+  "author": {
+    "@type": "Person",
+    "name": "Deyder Cintron",
+    "url": "https://deydercintron.com",
+    "sameAs": ["https://x.com/deydercintron"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bionic Builder",
+    "url": "https://thebionicbuilder.com"
+  }
+};
 ---
 
 <Layout
-  title="The Setups — field notes from a company run on AI employees"
+  title="Done Is a URL: The Four-Day Build of Tracked Vocals — Setup №1"
   description="Every setup used to run the shop: jobs, handoffs, what breaks, and what never gets handed to a bot. №1: the four-day build of Tracked Vocals."
+  ogImage="/images/og-setup-1.png"
+  schema={schema}
 >
   <article class="wide-width mx-auto px-6 py-8">
     <header class="prose-width mb-12">

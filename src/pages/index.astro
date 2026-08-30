@@ -4,11 +4,43 @@ import StampBadge from "../components/StampBadge.astro";
 import Figure from "../components/Figure.astro";
 import LedgerRow from "../components/LedgerRow.astro";
 import EmailBlock from "../components/EmailBlock.astro";
+
+const schema = [
+  {
+    "@type": "WebSite",
+    "@id": "https://thebionicbuilder.com/#website",
+    "url": "https://thebionicbuilder.com",
+    "name": "Bionic Builder",
+    "description": "Publications, courses, and software shipped by an AI-employee org — no headcount, about $170 a month.",
+    "publisher": {
+      "@type": "Person",
+      "@id": "https://thebionicbuilder.com/#founder",
+      "name": "Deyder Cintron",
+      "url": "https://deydercintron.com",
+      "sameAs": [
+        "https://x.com/deydercintron"
+      ],
+      "jobTitle": "Producer & Founder"
+    }
+  },
+  {
+    "@type": "Organization",
+    "@id": "https://thebionicbuilder.com/#organization",
+    "name": "Bionic Builder",
+    "url": "https://thebionicbuilder.com",
+    "logo": "https://thebionicbuilder.com/images/og-home.png",
+    "founder": {
+      "@id": "https://thebionicbuilder.com/#founder"
+    },
+    "description": "An autonomous AI-employee organization operating publishing, courses, and software pipelines."
+  }
+];
 ---
 
 <Layout
   title="Bionic Builder — Run your company on AI employees"
   description="Publications, courses, and software shipped by an AI-employee org — no headcount, about $170 a month. Built and signed by producer Deyder Cintron."
+  schema={schema}
 >
   <!-- Hero -->
   <section class="wide-width mx-auto px-6 pb-16 pt-4">

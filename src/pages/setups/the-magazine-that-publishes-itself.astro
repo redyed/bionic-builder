@@ -8,11 +8,35 @@ import EmailBlock from "../../components/EmailBlock.astro";
 const imagesDir = fileURLToPath(new URL("../../../public/images/", import.meta.url));
 const figurePath = `${imagesDir}sovereign-producer-listen.webp`;
 const hasFigure = existsSync(figurePath);
+
+const schema = {
+  "@type": "TechArticle",
+  "headline": "The Magazine That Publishes Itself",
+  "description": "Fifty issues by hand, then the line took over: research, writing, edits, approvals, publishing, and a cloned-voice narration — six to ten articles a week, throttled on purpose.",
+  "image": "https://thebionicbuilder.com/images/og-setup-2.png",
+  "datePublished": "2026-08-15",
+  "dateModified": "2026-08-30",
+  "inLanguage": "en",
+  "url": "https://thebionicbuilder.com/setups/the-magazine-that-publishes-itself",
+  "author": {
+    "@type": "Person",
+    "name": "Deyder Cintron",
+    "url": "https://deydercintron.com",
+    "sameAs": ["https://x.com/deydercintron"]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bionic Builder",
+    "url": "https://thebionicbuilder.com"
+  }
+};
 ---
 
 <Layout
   title="The Magazine That Publishes Itself — Setup №2"
   description="Fifty issues by hand, then the line took over: research, writing, edits, approvals, publishing, and a cloned-voice narration — six to ten articles a week, throttled on purpose."
+  ogImage="/images/og-setup-2.png"
+  schema={schema}
 >
   <article class="wide-width mx-auto px-6 py-8">
     <header class="prose-width mb-12">

@@ -2,11 +2,42 @@
 import Layout from "../../layouts/Layout.astro";
 import SetupIndexRow from "../../components/SetupIndexRow.astro";
 import EmailBlock from "../../components/EmailBlock.astro";
+
+const schema = {
+  "@type": "CollectionPage",
+  "name": "The Setups",
+  "url": "https://thebionicbuilder.com/setups",
+  "description": "Field notes from a company run on AI employees — every setup used to run the shop.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bionic Builder",
+    "url": "https://thebionicbuilder.com"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Setup №2 — The Magazine That Publishes Itself",
+        "url": "https://thebionicbuilder.com/setups/the-magazine-that-publishes-itself"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Setup №1 — Done Is a URL: The Four-Day Build of Tracked Vocals",
+        "url": "https://thebionicbuilder.com/setups/done-is-a-url"
+      }
+    ]
+  }
+};
 ---
 
 <Layout
   title="The Setups — field notes from a company run on AI employees"
   description="Field notes from a company run on AI employees — every setup used to run the shop. №1: the four-day build. №2: the magazine that publishes itself."
+  ogImage="/images/og-setups.png"
+  schema={schema}
 >
   <section class="wide-width mx-auto px-6 py-8">
     <header class="prose-width mb-12">

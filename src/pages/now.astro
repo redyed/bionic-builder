@@ -2,11 +2,25 @@
 import Layout from "../layouts/Layout.astro";
 import NowEntry from "../components/NowEntry.astro";
 import { nowEntries } from "../data/now-entries";
+
+const schema = {
+  "@type": "WebPage",
+  "name": "Now — The Weekly Value Ledger",
+  "url": "https://thebionicbuilder.com/now",
+  "description": "What shipped this week and what it was worth. Real numbers from a company run on AI employees.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bionic Builder",
+    "url": "https://thebionicbuilder.com"
+  }
+};
 ---
 
 <Layout
   title="Now — the weekly value ledger"
   description="What shipped this week and what it was worth. Real numbers from a company run on AI employees."
+  ogImage="/images/og-now.png"
+  schema={schema}
 >
   <section class="wide-width mx-auto px-6 py-16">
     <div class="prose-width">

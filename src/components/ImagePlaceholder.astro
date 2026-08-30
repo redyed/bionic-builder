@@ -7,6 +7,8 @@ interface Props {
   founderSupplied?: boolean;
   founderLabel?: string;
   showCaption?: boolean;
+  caption?: string;
+  ext?: "png" | "webp";
   class?: string;
 }
 
@@ -18,10 +20,12 @@ const {
   founderSupplied = false,
   founderLabel,
   showCaption = false,
+  caption = "",
+  ext = founderSupplied ? "webp" : "png",
   class: className = "",
 } = Astro.props;
 
-const imagePath = `/images/${file}.png`;
+const imagePath = `/images/${file}.${ext}`;
 const displayLabel = founderLabel ?? (founderSupplied
   ? "REAL SCREENSHOT — founder supplies. No mockups, no generated dashboards."
   : label);
@@ -29,20 +33,21 @@ const displayLabel = founderLabel ?? (founderSupplied
 
 <figure class:list={["w-full", className]}>
   <div
-    class="relative flex w-full items-center justify-center overflow-hidden border border-dashed border-rule bg-paper"
+    class="image-frame relative flex w-full items-center justify-center overflow-hidden border border-dashed border-rule bg-paper"
     style={`aspect-ratio: ${aspectRatio};`}
   >
     <img
       src={imagePath}
       alt={alt}
-      class="absolute inset-0 h-full w-full object-cover"
+      class="absolute inset-0 h-full w-full object-cover object-top"
+      onload="this.nextElementSibling?.classList.add('hidden'); this.closest('.image-frame')?.classList.remove('border-dashed');"
       onerror="this.style.display='none'"
     />
     <span class="font-data relative z-10 px-4 text-center text-xs text-muted">{displayLabel}</span>
   </div>
   {showCaption && (
     <figcaption class="mt-2 font-body text-sm text-muted">
-      <!-- Founder writes caption -->
+      {caption}
     </figcaption>
   )}
 </figure>

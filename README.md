@@ -1,6 +1,6 @@
 # Bionic Builder
 
-Static site for [bionicbuilder.com](https://bionicbuilder.com) — built with Astro and Tailwind.
+Static site for [thebionicbuilder.com](https://thebionicbuilder.com) — built with Astro and Tailwind.
 
 ## Stack
 
@@ -25,7 +25,7 @@ npm run dev
 
 1. Set `FORM_ACTION_URL` in `src/components/EmailBlock.astro` to your email provider endpoint.
 2. Drop generated images into `public/images/` (see build directive for filenames).
-3. Add founder-supplied screenshots: `receipt-real.png`, `tv-desktop.png`.
+3. Add founder-supplied screenshots: `receipt-real.webp`, `tv-desktop.webp`.
 
 ## Deploy
 

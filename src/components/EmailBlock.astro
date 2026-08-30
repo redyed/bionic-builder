@@ -1,6 +1,5 @@
 ---
-// TODO: Replace FORM_ACTION_URL with the email provider's form endpoint (Beehiiv / Buttondown / etc.)
-const FORM_ACTION_URL = "#TODO_FORM_ACTION";
+const FORM_ACTION_URL = "https://app.loops.so/api/newsletter-form/cmtfjkk8e04k90j065p9e2mq0";
 ---
 
 <section class="prose-width mx-auto px-6 py-16" aria-labelledby="email-heading">
@@ -26,6 +25,7 @@ const FORM_ACTION_URL = "#TODO_FORM_ACTION";
       placeholder="you@example.com"
       class="min-w-0 flex-1 border border-rule bg-paper px-4 py-3 font-body text-lg text-ink placeholder:text-muted focus:border-stamp focus:outline-none"
     />
+    <input type="hidden" name="userGroup" value="site" />
     <button
       type="submit"
       class="cursor-pointer border-0 bg-stamp px-6 py-3 font-display text-sm font-black uppercase tracking-wider text-paper hover:opacity-90"
@@ -48,23 +48,18 @@ const FORM_ACTION_URL = "#TODO_FORM_ACTION";
   const error = document.getElementById("email-error");
 
   form?.addEventListener("submit", async (event) => {
-    const action = form.action;
-
-    if (action.includes("TODO_FORM_ACTION")) {
-      event.preventDefault();
-      success?.classList.add("hidden");
-      error?.classList.remove("hidden");
-      return;
-    }
-
     event.preventDefault();
     success?.classList.add("hidden");
     error?.classList.add("hidden");
 
+    const email = (form.querySelector("#email-input") as HTMLInputElement | null)?.value?.trim() ?? "";
+    const body = `email=${encodeURIComponent(email)}&userGroup=${encodeURIComponent("site")}`;
+
     try {
-      const response = await fetch(action, {
-        method: form.method || "POST",
-        body: new FormData(form),
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
       });
 
       if (response.ok) {

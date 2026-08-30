@@ -1,0 +1,26 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  href: string;
+  dek: string;
+  date: string;
+}
+
+const { number, title, href, dek, date } = Astro.props;
+const linkClass = "text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp";
+---
+
+<div class="section-rule py-4">
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+    <div class="min-w-0">
+      <p class="font-body text-lg leading-relaxed text-ink">
+        <span class="font-data">{number}</span>
+        {" — "}
+        <a href={href} class={linkClass}>{title}</a>
+      </p>
+      <p class="mt-1 font-body text-base text-muted">{dek}</p>
+    </div>
+    <span class="font-data shrink-0 text-base text-muted">{date}</span>
+  </div>
+</div>

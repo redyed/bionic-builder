@@ -4,17 +4,42 @@ interface Props {
   value?: string;
   muted?: boolean;
   href?: string;
+  labelHref?: string;
+  suffix?: string;
+  suffixHref?: string;
 }
 
-const { label, value, muted = false, href } = Astro.props;
+const {
+  label,
+  value,
+  muted = false,
+  href,
+  labelHref,
+  suffix,
+  suffixHref,
+} = Astro.props;
+
+const linkClass = "text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp";
+
+function externalAttrs(url?: string) {
+  return url?.startsWith("http") ? { target: "_blank", rel: "noopener" } : {};
+}
 ---
 
 <div class:list={["section-rule flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between", muted && "text-muted"]}>
   <span class="font-body text-lg">
-    {href ? (
-      <a href={href} class="text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp">
-        {label}
-      </a>
+    {labelHref ? (
+      <>
+        <a href={labelHref} class={linkClass} {...externalAttrs(labelHref)}>{label}</a>
+        {suffix && suffixHref && (
+          <>
+            {" "}
+            <a href={suffixHref} class={linkClass} {...externalAttrs(suffixHref)}>{suffix}</a>
+          </>
+        )}
+      </>
+    ) : href ? (
+      <a href={href} class={linkClass} {...externalAttrs(href)}>{label}</a>
     ) : (
       label
     )}

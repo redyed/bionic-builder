@@ -7,6 +7,11 @@
   </defs>
   <g filter="url(#ink)">
     <path d="M 5.9 6.4 H 94.0 Q 95.0 5.9 94.6 8.1 V 93.7 Q 94.9 94.7 93.5 94.7 H 6.7 Q 5.2 94.9 6.1 93.6 V 7.6 Q 5.3 5.8 5.9 6.4 Z" fill="none" stroke="#C22F2A" stroke-width="3.0" stroke-linejoin="round" />
+    <line x1="8.5" y1="25.5" x2="48.0" y2="25.5" stroke="#C22F2A" stroke-width="1.1" stroke-linecap="square" />
+    <line x1="8.5" y1="37.5" x2="33.0" y2="37.5" stroke="#C22F2A" stroke-width="1.1" stroke-linecap="square" />
+    <line x1="8.5" y1="49.5" x2="28.5" y2="49.5" stroke="#C22F2A" stroke-width="1.1" stroke-linecap="square" />
+    <line x1="8.5" y1="61.5" x2="36.0" y2="61.5" stroke="#C22F2A" stroke-width="1.1" stroke-linecap="square" />
+    <line x1="8.5" y1="73.5" x2="31.0" y2="73.5" stroke="#C22F2A" stroke-width="1.1" stroke-linecap="square" />
     <path d="M74 0V688H532Q584 688 627.0 666.5Q670 645 696.0 607.0Q722 569 722 519Q722 469 706.0 437.0Q690 405 664.0 386.5Q638 368 607 359V355Q643 347 672.5 327.5Q702 308 720.0 273.0Q738 238 738 183Q738 128 711.0 87.0Q684 46 639.0 23.0Q594 0 538 0ZM295 160H463Q486 160 500.0 176.0Q514 192 514 224Q514 239 507.5 251.5Q501 264 489.5 271.0Q478 278 463 278H295ZM295 420H447Q463 420 474.0 427.5Q485 435 491.5 449.0Q498 463 498 484Q498 506 483.0 521.5Q468 537 447 537H295Z" fill="#C22F2A" transform="translate(17.304 10.784) scale(0.114000)" />
   </g>
 </svg>

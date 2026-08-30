@@ -1,0 +1,42 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: "lazy" | "eager";
+  caption?: string;
+  figureClass?: string;
+  imgClass?: string;
+  imgStyle?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = "lazy",
+  caption,
+  figureClass,
+  imgClass = "block h-auto w-full",
+  imgStyle,
+} = Astro.props;
+---
+
+<figure class={figureClass}>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    class={imgClass}
+    style={imgStyle}
+  />
+  {caption && (
+    <figcaption class="mt-2 text-center font-body text-sm text-muted">
+      {caption}
+    </figcaption>
+  )}
+</figure>

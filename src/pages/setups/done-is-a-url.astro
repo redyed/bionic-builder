@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ImagePlaceholder from "../components/ImagePlaceholder.astro";
-import EmailBlock from "../components/EmailBlock.astro";
+import Layout from "../../layouts/Layout.astro";
+import Figure from "../../components/Figure.astro";
+import EmailBlock from "../../components/EmailBlock.astro";
 ---
 
 <Layout
@@ -99,14 +99,12 @@ import EmailBlock from "../components/EmailBlock.astro";
       </div>
 
       <div class="my-12">
-        <ImagePlaceholder
-          label="img-tv-desktop"
-          file="tv-desktop"
-          aspectRatio="16 / 10"
-          founderSupplied={true}
-          showCaption={true}
-          caption="Tracked Vocals"
+        <Figure
+          src="/images/tv-desktop.webp"
           alt="Tracked Vocals desktop directory with vocalist search filters and an expanded profile card."
+          width={1024}
+          height={589}
+          caption="The desktop expanded view — the density is the product."
         />
       </div>
 
@@ -122,7 +120,7 @@ import EmailBlock from "../components/EmailBlock.astro";
         </p>
 
         <p>
-          What it would have cost the old way: I asked for an estimate of a traditional dev team building the same thing, and the answer came back around $70,000 and a timeline measured in months. That estimate came from an AI, so salt it however you like. The part that needs no salt: four days, and a URL you can visit.
+          What it would have cost the old way: I asked for an estimate of a traditional dev team building the same thing, and the answer came back around $70,000 and a timeline measured in months. That estimate came from an AI, so salt it however you like. The part that needs no salt: four days, and <a href="https://trackedvocals.com" target="_blank" rel="noopener" class="text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp">a URL you can visit</a>.
         </p>
 
         <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">What the army did not do</h2>

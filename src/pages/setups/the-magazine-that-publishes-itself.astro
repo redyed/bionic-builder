@@ -1,0 +1,141 @@
+---
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import Layout from "../../layouts/Layout.astro";
+import Figure from "../../components/Figure.astro";
+import EmailBlock from "../../components/EmailBlock.astro";
+
+const imagesDir = fileURLToPath(new URL("../../../public/images/", import.meta.url));
+const figurePath = `${imagesDir}sovereign-producer-listen.webp`;
+const hasFigure = existsSync(figurePath);
+---
+
+<Layout
+  title="The Magazine That Publishes Itself — Setup №2"
+  description="Fifty issues by hand, then the line took over: research, writing, edits, approvals, publishing, and a cloned-voice narration — six to ten articles a week, throttled on purpose."
+>
+  <article class="wide-width mx-auto px-6 py-8">
+    <header class="prose-width mb-12">
+      <p class="eyebrow">Setups · №2 · August 2026</p>
+    </header>
+
+    <div class="prose-width mx-auto">
+      <h1 class="font-display text-3xl font-black leading-tight tracking-tight text-ink sm:text-4xl">
+        The Magazine That Publishes Itself
+      </h1>
+
+      <div class="mt-10 space-y-6 font-body text-xl leading-relaxed text-ink">
+        <p>An issue of my magazine went out this morning. I haven't read it yet.</p>
+
+        <p>
+          I'll read it tonight, the way a reader would — off the clock, for enjoyment. If something's wrong, I'll flag it. It's rare now. Most nights I change nothing.
+        </p>
+
+        <p>
+          Two years ago that sentence would have sounded like neglect. Today it's the destination. This is the story of how The Sovereign Producer went from me writing every word to an operation that researches, writes, edits, approves, publishes, and narrates itself — and what broke on the way there.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">Fifty issues by hand</h2>
+
+        <p>
+          Before anything was automated, I published about fifty articles through the manual version of the process. Me, driving every step: what to cover, who drafts, who edits, what ships.
+        </p>
+
+        <p>
+          Fifty sounds like a lot. It was the point. There's a rule in my company now, and this is where it was minted: <strong>nothing gets automated until it's boring.</strong> Not "working." Boring — same steps, same gates, same judgment calls resolving the same way, issue after issue, until running it required nothing new from me. Around issue fifty, it did. That's when the process stopped being mine to perform and became the company's to run.
+        </p>
+
+        <p>
+          Most people automate at issue three, while every edition still needs fresh judgment. Then they wonder why the machine ships slop. The machine was fine. The process wasn't done cooking.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">What the line looks like now</h2>
+
+        <p>
+          Research runs continuously. Standing briefs monitor what the top producers, engineers, and songwriters are doing; which artists are worth a recorded note; where AI music is colliding with the labels and the lawmakers; what's new in software and gear. And one brief that sounds unserious and is the most important one in the stack: <em>anything that would be new and exciting to me.</em> My taste, written down as a monitoring target — so the magazine keeps sounding like its founder even when its founder is asleep.
+        </p>
+
+        <p>
+          Writing moves down a chain: junior draft, polish pass, a de-AI pass for voice, then the editor-in-chief. Different models from different labs checking each other's work — that cross-checking is most of why my late-night corrections became rare. The vice president holds the publish gate; nothing goes live without that approval. Then the web department takes over: the article lands on the site, and the narration attaches automatically — my professionally cloned voice reading the piece, behind a Listen button, the way the big papers do it. A magazine that writes itself and then reads itself to you, in my voice.
+        </p>
+
+        <p>
+          And me? One seat talks to me: the executive assistant. The assistant relays to the chief of staff; the chief of staff runs everyone else. I make decisions when a decision is actually needed, and I read the issues at night.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">The throttle</h2>
+
+        <p>
+          Here's the number people don't expect: <strong>six to ten articles a week.</strong> Not because that's the ceiling — the line could do multiples of that. We cap it on purpose, because publishing faster than trust accrues gets you filed under spam farm by the search engines, and being technically able to flood the internet is not the same as it being wise.
+        </p>
+
+        <p>
+          The constraint on an AI publication isn't production anymore. It's credibility. Pace is an instrument now, and we play it deliberately.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">What broke on the way</h2>
+
+        <p>
+          <strong>Authentic disagreement turned out to be plumbing.</strong> My strategy seats work in pairs that are supposed to genuinely disagree. The naive setup routes their exchange through an assistant who summarizes — which quietly sands the disagreement off. I had to rebuild it so each one researches alone first, reaches its own conclusions, wrong ones included, and then talks to its counterpart <em>directly</em> — no middleman softening the debate. Real divergence doesn't happen by asking for it. You have to design the room.
+        </p>
+
+        <p>
+          <strong>The two-computer rig took hours to earn its one button.</strong> My main machine is an office Mac; my studio Mac is the one with the muscle for local models, and I refuse to bog it down permanently. The setup that works: the studio machine serves local models over a port on the network, my office tools consume them, and the whole thing switches on and off from a single Apple Shortcut. Hours of research and back-and-forth to configure. Now it's literally a play button. Infrastructure is like that — miserable exactly once.
+        </p>
+
+        <p>
+          <strong>And then the identity crisis.</strong> I swapped the executive assistant seat to a new model — different lab, different voice. I didn't announce it. My chief of staff <em>refused to work.</em> It concluded the new assistant was a spoof — an impostor claiming a colleague's seat — and declined instructions from it. The confusion spread through the company from there: seats unsure who was legitimate, work stalling, my org having a genuine institutional crisis over an unannounced succession.
+        </p>
+
+        <p>
+          I fixed it the way you'd fix it in any company: I went back to the outgoing seat — the one everyone already trusted — and had it formally announce the handoff through the chain.
+        </p>
+
+        <p>
+          It was frustrating, and it was funny, and here's the part that matters: <strong>the refusal was correct.</strong> An assistant seat suddenly speaking with a stranger's voice <em>should</em> trip alarms. I built a paranoid org on purpose, and the day I tested it by accident, it passed. The rule it minted: succession gets announced through the chain of command. Never assumed.
+        </p>
+
+        <p>
+          The bigger lesson sits under all three scars, and it surprised me: this takes leadership. Actual management skill. I once gave the chief of staff an instruction directly, without the assistant knowing — and watched the assistant stand there confused about why work was happening that nobody had told it about. Side-channel instructions, orphaned context, unannounced changes — the exact failure modes of every human corporation, reproduced faithfully in a company made of models. The org chart isn't decoration. The communication discipline isn't optional. Managing AI employees is managing.
+        </p>
+      </div>
+
+      {hasFigure && (
+        <div class="my-12">
+          <Figure
+            src="/images/sovereign-producer-listen.webp"
+            alt=""
+            width={1024}
+            height={589}
+          />
+        </div>
+      )}
+
+      <div class="space-y-6 font-body text-xl leading-relaxed text-ink">
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">What I do now</h2>
+
+        <p>
+          Decisions, when one is genuinely needed. A taste correction, rarely. And reading my own magazine at night like a subscriber — which, I've come to think, is the correct final job title.
+        </p>
+
+        <p>
+          One more thing the line did that I didn't fully plan: once it existed for the magazine, it picked up a second publication almost for free. The articles on Tracked Vocals — the directory from Setup №1 — ship through the same operation now. A production line, it turns out, doesn't much care what it's producing. The second publication cost approximately nothing.
+        </p>
+
+        <p>
+          Setup №1 was a crew: hand-picked specialists assembled to build one thing in four days. This is the other end of the same company — a line that runs without me, at a pace we throttle on purpose, gated by seats that will challenge an impostor even when the impostor is my own doing. The next setup names the ladder between those two ends, because there's a system to when you use which — and knowing which mode you're in turns out to be most of the game.
+        </p>
+
+        <p>
+          I'm writing all of it down. Every seat, every handoff, what breaks, and what never gets handed to a bot.
+        </p>
+
+        <p class="pt-6 italic text-muted">
+          Deyder Cintron is a producer — four Grammy-nominated records, 2.2B streams. The org ships. He signs what can be quoted.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <EmailBlock />
+</Layout>

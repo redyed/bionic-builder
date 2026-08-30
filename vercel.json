@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.thebionicbuilder.com"
+        }
+      ],
+      "destination": "https://thebionicbuilder.com/:path*",
+      "permanent": true
+    }
+  ]
+}

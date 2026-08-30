@@ -1,0 +1,38 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SetupIndexRow from "../../components/SetupIndexRow.astro";
+import EmailBlock from "../../components/EmailBlock.astro";
+---
+
+<Layout
+  title="The Setups — field notes from a company run on AI employees"
+  description="Field notes from a company run on AI employees — every setup used to run the shop. №1: the four-day build. №2: the magazine that publishes itself."
+>
+  <section class="wide-width mx-auto px-6 py-8">
+    <header class="prose-width mb-12">
+      <p class="eyebrow">The Setups</p>
+      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+        Field notes from a company run on AI employees. Jobs, handoffs, what breaks, and what never gets handed to a bot.
+      </p>
+    </header>
+
+    <div class="max-w-3xl">
+      <SetupIndexRow
+        number="№2"
+        title="The Magazine That Publishes Itself"
+        href="/setups/the-magazine-that-publishes-itself"
+        dek="Fifty issues by hand, then the line took over — and the day the org refused an impostor."
+        date="August 2026"
+      />
+      <SetupIndexRow
+        number="№1"
+        title="Done Is a URL: The Four-Day Build of Tracked Vocals"
+        href="/setups/done-is-a-url"
+        dek="A producer's complaint, a hand-picked crew, four days, a live directory."
+        date="August 2026"
+      />
+    </div>
+  </section>
+
+  <EmailBlock />
+</Layout>

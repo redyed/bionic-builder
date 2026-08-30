@@ -1,0 +1,42 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2">
+  Skip to content
+</a>
+
+<header class="wide-width mx-auto px-6 py-8">
+  <nav class="flex items-center justify-between" aria-label="Main">
+    <a
+      href="/"
+      class="font-display text-sm font-black uppercase tracking-[0.15em] text-ink no-underline hover:text-stamp"
+    >
+      Bionic Builder
+    </a>
+    <ul class="flex gap-8">
+      <li>
+        <a
+          href="/setups"
+          class:list={[
+            "font-display text-sm font-black uppercase tracking-wider no-underline hover:text-stamp",
+            currentPath === "/setups" ? "text-stamp" : "text-ink",
+          ]}
+        >
+          Setups
+        </a>
+      </li>
+      <li>
+        <a
+          href="/now"
+          class:list={[
+            "font-display text-sm font-black uppercase tracking-wider no-underline hover:text-stamp",
+            currentPath === "/now" ? "text-stamp" : "text-ink",
+          ]}
+        >
+          Now
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

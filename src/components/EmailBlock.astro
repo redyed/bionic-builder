@@ -1,0 +1,80 @@
+---
+// TODO: Replace FORM_ACTION_URL with the email provider's form endpoint (Beehiiv / Buttondown / etc.)
+const FORM_ACTION_URL = "#TODO_FORM_ACTION";
+---
+
+<section class="prose-width mx-auto px-6 py-16" aria-labelledby="email-heading">
+  <h2 id="email-heading" class="font-display text-2xl font-black uppercase tracking-wide text-ink">
+    Send the next one.
+  </h2>
+  <p class="mt-4 font-body text-xl leading-relaxed text-ink">
+    New setups from the shop — jobs, handoffs, what breaks, what never gets handed to a bot.
+  </p>
+
+  <form
+    id="email-form"
+    class="mt-8 flex flex-col gap-4 sm:flex-row"
+    method="POST"
+    action={FORM_ACTION_URL}
+  >
+    <label for="email-input" class="sr-only">Email address</label>
+    <input
+      id="email-input"
+      name="email"
+      type="email"
+      required
+      placeholder="you@example.com"
+      class="min-w-0 flex-1 border border-rule bg-paper px-4 py-3 font-body text-lg text-ink placeholder:text-muted focus:border-stamp focus:outline-none"
+    />
+    <button
+      type="submit"
+      class="cursor-pointer border-0 bg-stamp px-6 py-3 font-display text-sm font-black uppercase tracking-wider text-paper hover:opacity-90"
+    >
+      Get the next setup
+    </button>
+  </form>
+
+  <p id="email-success" class="mt-4 hidden font-body text-base text-ink" role="status">
+    Done — the next setup will land in your inbox.
+  </p>
+  <p id="email-error" class="mt-4 hidden font-body text-base text-stamp" role="alert">
+    That address didn't go through. Check it and try again.
+  </p>
+</section>
+
+<script>
+  const form = document.getElementById("email-form") as HTMLFormElement | null;
+  const success = document.getElementById("email-success");
+  const error = document.getElementById("email-error");
+
+  form?.addEventListener("submit", async (event) => {
+    const action = form.action;
+
+    if (action.includes("TODO_FORM_ACTION")) {
+      event.preventDefault();
+      success?.classList.add("hidden");
+      error?.classList.remove("hidden");
+      return;
+    }
+
+    event.preventDefault();
+    success?.classList.add("hidden");
+    error?.classList.add("hidden");
+
+    try {
+      const response = await fetch(action, {
+        method: form.method || "POST",
+        body: new FormData(form),
+      });
+
+      if (response.ok) {
+        form.reset();
+        success?.classList.remove("hidden");
+      } else {
+        error?.classList.remove("hidden");
+      }
+    } catch {
+      error?.classList.remove("hidden");
+    }
+  });
+</script>

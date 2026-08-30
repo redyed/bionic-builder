@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import "@fontsource/archivo/800.css";
+@import "@fontsource/archivo/900.css";
+@import "@fontsource/source-serif-4/400.css";
+@import "@fontsource/source-serif-4/600.css";
+
+@theme {
+  --color-paper: #f7f5f0;
+  --color-ink: #14120f;
+  --color-muted: #6e675c;
+  --color-rule: #dad5ca;
+  --color-stamp: #c22f2a;
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Source Serif 4", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    @apply bg-paper text-ink antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-lg leading-relaxed;
+  }
+
+  ::selection {
+    @apply bg-stamp/15;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-stamp;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .eyebrow {
+    @apply font-display text-xs font-black uppercase tracking-[0.2em] text-muted;
+  }
+
+  .section-rule {
+    @apply border-t border-rule;
+  }
+
+  .prose-width {
+    max-width: 68ch;
+  }
+
+  .wide-width {
+    max-width: 1050px;
+  }
+}
+
+@keyframes stamp-thunk {
+  0% {
+    transform: rotate(-4deg) scale(1.15);
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotate(-4deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.stamp-animate {
+  animation: stamp-thunk 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-animate {
+    animation: none;
+  }
+}

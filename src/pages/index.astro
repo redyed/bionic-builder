@@ -1,0 +1,195 @@
+---
+import Layout from "../layouts/Layout.astro";
+import StampBadge from "../components/StampBadge.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import LedgerRow from "../components/LedgerRow.astro";
+import EmailBlock from "../components/EmailBlock.astro";
+---
+
+<Layout
+  title="Bionic Builder — Run your company on AI employees"
+  description="Publications, courses, and software shipped by an AI-employee org — no headcount, about $170 a month. Built and signed by producer Deyder Cintron."
+>
+  <!-- Hero -->
+  <section class="wide-width mx-auto px-6 pb-16 pt-4">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div class="prose-width">
+        <p class="eyebrow">Bionic Builder</p>
+        <h1 class="mt-4 font-display text-4xl font-black leading-tight tracking-tight text-ink sm:text-5xl">
+          Run your company on AI employees.
+        </h1>
+        <p class="mt-6 font-body text-2xl leading-relaxed text-ink">
+          No headcount. You keep the judgment.
+        </p>
+        <p class="mt-4 font-body text-lg leading-relaxed text-ink">
+          Publications, courses, software — live URLs, not chat logs. The whole org runs on about $170 a month.
+        </p>
+        <a
+          href="/setups"
+          class="mt-8 inline-block bg-stamp px-6 py-3 font-display text-sm font-black uppercase tracking-wider text-paper no-underline hover:opacity-90"
+        >
+          Read the setups
+        </a>
+      </div>
+
+      <div class="relative">
+        <ImagePlaceholder
+          label="img-hero"
+          file="hero"
+          aspectRatio="4 / 3"
+          alt="Patent-style drawing of documents moving along a machine line toward a gate, where a human hand applies a red approval stamp."
+        />
+        <div class="absolute -bottom-4 -right-2 sm:-right-6">
+          <StampBadge text="Signed · D.C." animate={true} />
+        </div>
+      </div>
+    </div>
+
+    <p class="prose-width mt-12 font-body text-base text-muted">
+      Built and run by Deyder Cintron — producer, four Grammy-nominated records, 2.2B streams. The org ships the companies. He signs what can be quoted.
+    </p>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="section-rule wide-width mx-auto px-6 py-16">
+    <div class="prose-width">
+      <p class="eyebrow">Who it's for</p>
+      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+        For people who already make the work — a magazine, a practice, a product — and are done being the bottleneck.
+      </p>
+      <p class="mt-4 font-body text-xl leading-relaxed text-ink">
+        If you only make prompts, this isn't for you. If you have to ship an issue, a cohort, or a tool on Tuesday, it is.
+      </p>
+    </div>
+  </section>
+
+  <!-- What the employees are for -->
+  <section class="wide-width mx-auto px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-3">
+      <article>
+        <ImagePlaceholder
+          label="img-card-publish"
+          file="card-publish"
+          aspectRatio="1 / 1"
+          alt="Line drawing of a printed page rolling off a small press."
+        />
+        <h2 class="mt-6 font-display text-xl font-black uppercase tracking-wide text-ink">Publish</h2>
+        <p class="mt-3 font-body text-lg leading-relaxed text-ink">
+          Issues, posts, and pages that go live. Not drafts that die in a folder.
+        </p>
+      </article>
+
+      <article>
+        <ImagePlaceholder
+          label="img-card-product"
+          file="card-product"
+          aspectRatio="1 / 1"
+          alt="Line drawing of a wrapped parcel with a shipping tag."
+        />
+        <h2 class="mt-6 font-display text-xl font-black uppercase tracking-wide text-ink">Product</h2>
+        <p class="mt-3 font-body text-lg leading-relaxed text-ink">
+          Courses, waitlists, and software people can actually use.
+        </p>
+      </article>
+
+      <article>
+        <ImagePlaceholder
+          label="img-card-operate"
+          file="card-operate"
+          aspectRatio="1 / 1"
+          alt="Line drawing of a control panel with a single lever and an indicator."
+        />
+        <h2 class="mt-6 font-display text-xl font-black uppercase tracking-wide text-ink">Operate</h2>
+        <p class="mt-3 font-body text-lg leading-relaxed text-ink">
+          Research, design, handoffs — so you're not the paste layer between models.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- The shop floor -->
+  <section class="section-rule wide-width mx-auto px-6 py-16">
+    <div class="prose-width">
+      <p class="eyebrow">The shop floor</p>
+      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+        Not a prompt library. An organization — 31 seats across ten AI labs, run like a company because it is one.
+      </p>
+    </div>
+
+    <div class="mt-10 max-w-3xl">
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+        Approval gates on send, spend, and publish — nothing irreversible happens without a human.
+      </div>
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+        A value ledger — every week, what shipped and what it was worth, in numbers.
+      </div>
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+        An auditor that never shares a lab with the work it audits.
+      </div>
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+        Done = a URL — a file nobody was told about does not count.
+      </div>
+    </div>
+
+    <div class="relative mt-12 max-w-3xl border border-rule p-8">
+      <blockquote class="font-body text-xl leading-relaxed text-ink">
+        "The system assumes agents fail. The gates exist so failures die in review, not in public."
+      </blockquote>
+      <div class="absolute -top-5 right-6">
+        <StampBadge text="Reviewed" />
+      </div>
+    </div>
+
+    <p class="prose-width mt-8 font-body text-base text-muted">
+      Every rule in this shop is a tombstone — sessions rot, ghost profiles respawn, and the rules exist because something broke.
+    </p>
+  </section>
+
+  <!-- Receipts -->
+  <section class="section-rule wide-width mx-auto px-6 py-16">
+    <p class="eyebrow">Receipts</p>
+
+    <div class="mt-8 max-w-3xl">
+      <LedgerRow label="The Sovereign Producer — a magazine that publishes" />
+      <LedgerRow
+        label="Tracked Vocals — a working directory, built in 4 days — that build is Setup №1"
+        href="/setups"
+        value="4 days"
+      />
+      <LedgerRow label="The whole org" value="≈ $170 / month" />
+      <LedgerRow
+        label="The older receipts — 4× Grammy-nominated records · 2.2B streams"
+        muted={true}
+      />
+    </div>
+
+    <div class="mt-12 max-w-3xl">
+      <ImagePlaceholder
+        label="img-receipt-real"
+        file="receipt-real"
+        aspectRatio="16 / 10"
+        founderSupplied={true}
+        showCaption={true}
+        alt=""
+      />
+    </div>
+  </section>
+
+  <!-- The setups -->
+  <section class="section-rule wide-width mx-auto px-6 py-16">
+    <div class="prose-width">
+      <h2 class="font-display text-3xl font-black uppercase tracking-wide text-ink">The setups</h2>
+      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+        Every setup used to run the shop. Jobs, handoffs, what breaks, and what never gets handed to a bot.
+      </p>
+      <a
+        href="/setups"
+        class="mt-8 inline-block bg-stamp px-6 py-3 font-display text-sm font-black uppercase tracking-wider text-paper no-underline hover:opacity-90"
+      >
+        Read the setups
+      </a>
+    </div>
+  </section>
+
+  <EmailBlock />
+</Layout>

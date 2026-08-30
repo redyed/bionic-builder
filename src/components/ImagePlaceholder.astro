@@ -1,0 +1,48 @@
+---
+interface Props {
+  label: string;
+  file: string;
+  aspectRatio: string;
+  alt?: string;
+  founderSupplied?: boolean;
+  founderLabel?: string;
+  showCaption?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  file,
+  aspectRatio,
+  alt = "",
+  founderSupplied = false,
+  founderLabel,
+  showCaption = false,
+  class: className = "",
+} = Astro.props;
+
+const imagePath = `/images/${file}.png`;
+const displayLabel = founderLabel ?? (founderSupplied
+  ? "REAL SCREENSHOT — founder supplies. No mockups, no generated dashboards."
+  : label);
+---
+
+<figure class:list={["w-full", className]}>
+  <div
+    class="relative flex w-full items-center justify-center overflow-hidden border border-dashed border-rule bg-paper"
+    style={`aspect-ratio: ${aspectRatio};`}
+  >
+    <img
+      src={imagePath}
+      alt={alt}
+      class="absolute inset-0 h-full w-full object-cover"
+      onerror="this.style.display='none'"
+    />
+    <span class="font-data relative z-10 px-4 text-center text-xs text-muted">{displayLabel}</span>
+  </div>
+  {showCaption && (
+    <figcaption class="mt-2 font-body text-sm text-muted">
+      <!-- Founder writes caption -->
+    </figcaption>
+  )}
+</figure>

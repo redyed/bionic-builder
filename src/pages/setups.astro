@@ -1,0 +1,154 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import EmailBlock from "../components/EmailBlock.astro";
+---
+
+<Layout
+  title="The Setups — field notes from a company run on AI employees"
+  description="Every setup used to run the shop: jobs, handoffs, what breaks, and what never gets handed to a bot. №1: the four-day build of Tracked Vocals."
+>
+  <article class="wide-width mx-auto px-6 py-8">
+    <header class="prose-width mb-12">
+      <p class="eyebrow">Setups · №1 · August 2026</p>
+    </header>
+
+    <div class="prose-width mx-auto">
+      <h1 class="font-display text-3xl font-black leading-tight tracking-tight text-ink sm:text-4xl">
+        Done Is a URL: The Four-Day Build of Tracked Vocals
+      </h1>
+
+      <div class="mt-10 space-y-6 font-body text-xl leading-relaxed text-ink">
+        <p>This did not start with a strategy session. It started with me scrolling Instagram.</p>
+
+        <p>
+          A video comes up: a session singer I've worked with for years, at a studio in Nashville. The producer next to her is venting about how hard it's gotten to find session singers. You dig through hashtags. You cross-reference SoundBetter. You hope. And for the serious projects — the ones that need union singers, real credits, real reliability — there's no single place you actually trust.
+        </p>
+
+        <p>
+          I've lived both sides of that problem for years. So something in me went: that's not a complaint. That's a spec.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">The step almost everyone skips</h2>
+
+        <p>I didn't open a code editor. I didn't write a prompt that starts with "build me."</p>
+
+        <p>
+          I took the idea to Meta AI — the AI attached to the exact platform where the complaining was happening — and asked: is this a pattern? Is this pain abundant inside Instagram and Facebook, or did I just watch one frustrated producer?
+        </p>
+
+        <p>
+          Abundant. Here's the shape of it. Here's what people keep saying in comments.
+        </p>
+
+        <p>
+          That's a demand check that cost nothing and took minutes. Idea from the wild, verified in the wild, before a dollar of compute got spent. If you take one move from this story, take that one.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">Into the machine</h2>
+
+        <p>From there it entered the company.</p>
+
+        <p>
+          Some context: I run my businesses on a 31-seat AI organization — 34 role playbooks, models from ten different labs, structured like an actual company with executives, departments, and gates. Publications, courses, software. What follows is one build moving through it.
+        </p>
+
+        <p>
+          Gemini did the market research: the competitive landscape, why the existing options are resented, where the gap is. Claude Fable did strategy: what this thing had to be, who it served, and what it had to refuse to become. The answer looked like an Airbnb-style directory for vetted session singers — union talent included — built for someone casting a serious record, not another gig-economy bazaar.
+        </p>
+
+        <p>
+          Then the build pair. Opus architected and directed: structure, sequencing, what gets built in what order. Grok executed at volume, at a fraction of the cost. Expensive model decides, efficient model types.
+        </p>
+
+        <p>
+          There was a ton of back and forth between those two. This was not one prompt and a miracle. My job inside the loop: press the buttons only a human can press, follow the architect's instructions, and make the call whenever a decision had taste or risk in it.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">Where it stopped being a toy</h2>
+
+        <p>
+          The moment a database existed, the stakes changed. A talent directory stores people's information — and in this industry, that includes parents managing profiles for minors. That is not a move-fast zone. That's a get-it-right-or-don't-ship zone.
+        </p>
+
+        <p>
+          Opus kept a running security tab through the entire build. Fable closed the loop on how the data would be handled. And then I did the paranoid thing my company's doctrine is built on: I brought in a model from a completely different lab — GLM — gave it no loyalty to the work, and told it to try to break the site.
+        </p>
+
+        <p>
+          Adversarial review, cross-lab, on purpose. It's the same rule my Auditor seat runs on: the lab that built the thing never gets to be the one that clears it.
+        </p>
+
+        <p>
+          I won't list what we hardened, and I won't claim the site is unbreakable — saying that in public is an invitation, and real security is ongoing, human-involved work. What I'll claim is simpler: it was attacked before it was ever shown to anyone.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">Day four</h2>
+
+        <p>
+          On day four, I put the site in front of the singer from the video that started all of this.
+        </p>
+
+        <p>
+          Her read: it looks amazing, the idea is right, and it's too much. Too much information hitting you at once. Make it digestible, screen by screen.
+        </p>
+
+        <p>
+          She was right, and it forced the best product decision of the build: mobile gets the minimal layout, desktop gets the full expanded view. Because the expanded view <em>is</em> the product — the density of detail is exactly what a producer casting a record needs, and exactly what a phone can't carry.
+        </p>
+      </div>
+
+      <div class="my-12">
+        <ImagePlaceholder
+          label="img-tv-desktop"
+          file="tv-desktop"
+          aspectRatio="16 / 10"
+          founderSupplied={true}
+          founderLabel="FOUNDER-SUPPLIED — Tracked Vocals desktop expanded view"
+          showCaption={true}
+          alt=""
+        />
+      </div>
+
+      <div class="space-y-6 font-body text-xl leading-relaxed text-ink">
+        <p>
+          She's now actively helping refine the site. The person whose problem opened this story is on the project. That's the loop, closed.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">The math</h2>
+
+        <p>
+          What it cost me: a few days, inside subscriptions I was already paying. For the record, the entire 31-seat company runs on about $170 a month — Claude Max, SuperGrok, Cursor, and Gemini Pro — plus roughly $35 in API credits spent to date, total.
+        </p>
+
+        <p>
+          What it would have cost the old way: I asked for an estimate of a traditional dev team building the same thing, and the answer came back around $70,000 and a timeline measured in months. That estimate came from an AI, so salt it however you like. The part that needs no salt: four days, and a URL you can visit.
+        </p>
+
+        <h2 class="pt-6 font-display text-2xl font-black uppercase tracking-wide text-ink">What the army did not do</h2>
+
+        <p>
+          It didn't watch Instagram. It didn't recognize a producer's complaint as a spec. It didn't decide the problem was worth building for. It didn't know her, and it didn't have the relationship that makes a colleague pick up on day four and tell you the truth about your product. It didn't make the mobile/desktop call. And it doesn't carry the responsibility of storing families' information — I do.
+        </p>
+
+        <p>
+          That's the actual division of labor. Judgment, taste, relationships, and irreversible acts stay human. Everything else is operations now, and operations are what the machine is for.
+        </p>
+
+        <p>
+          Done, in my company, has exactly one definition: a URL a real person can use. Tracked Vocals is that. The Sovereign Producer — the magazine the same org publishes — is that.
+        </p>
+
+        <p>
+          I'm writing the setups down. Every seat, every handoff, what breaks, and the short list of things I will never hand to a bot. If you make real work and want the company around it to run without a headcount, that's what Bionic Builder is.
+        </p>
+
+        <p class="pt-6 italic text-muted">
+          Deyder Cintron is a producer — four Grammy-nominated records, 2.2B streams. The org ships. He signs what can be quoted.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <EmailBlock />
+</Layout>

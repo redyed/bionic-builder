@@ -163,11 +163,13 @@ import EmailBlock from "../components/EmailBlock.astro";
       />
     </div>
 
-    <div class="mt-12 max-w-3xl">
+    <div class="mt-12 flex justify-center">
       <ImagePlaceholder
         label="img-receipt-real"
         file="receipt-real"
-        aspectRatio="16 / 10"
+        fit="contain"
+        width={409}
+        height={512}
         founderSupplied={true}
         showCaption={true}
         caption="MUSO.AI credits — 210 credits, 96% above industry average."

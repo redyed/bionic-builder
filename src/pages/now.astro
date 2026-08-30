@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import NowEntry from "../components/NowEntry.astro";
+import { nowEntries } from "../data/now-entries";
 ---
 
 <Layout
@@ -14,15 +16,15 @@ import Layout from "../layouts/Layout.astro";
       </p>
     </div>
 
-    <div class="mt-12 max-w-3xl">
-      <div class="section-rule py-4">
-        <h2 class="font-display text-lg font-black uppercase tracking-wider text-ink">Week of —</h2>
-      </div>
-      <div class="section-rule py-4">
-        <p class="font-body text-lg text-muted">
-          [The first ledger posts with the first weekly review. Real numbers only — this page never estimates.]
-        </p>
-      </div>
+    <div class="mt-12 max-w-3xl space-y-0">
+      {nowEntries.map((entry) => (
+        <NowEntry
+          id={entry.id}
+          weekOf={entry.weekOf}
+          subtitle={entry.subtitle}
+          rows={entry.rows}
+        />
+      ))}
     </div>
   </section>
 </Layout>

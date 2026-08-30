@@ -1,0 +1,26 @@
+---
+import LedgerRow from "./LedgerRow.astro";
+
+interface Props {
+  id: string;
+  weekOf: string;
+  subtitle?: string;
+  rows: Array<{ label: string; value: string }>;
+}
+
+const { id, weekOf, subtitle, rows } = Astro.props;
+---
+
+<section id={id} class="scroll-mt-8">
+  <header class="section-rule py-4">
+    <h2 class="font-data text-sm uppercase tracking-wider text-ink">
+      Week of {weekOf}
+    </h2>
+    {subtitle && (
+      <p class="mt-1 font-body text-base text-muted">{subtitle}</p>
+    )}
+  </header>
+  {rows.map((row) => (
+    <LedgerRow label={row.label} value={row.value} />
+  ))}
+</section>

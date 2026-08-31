@@ -10,6 +10,10 @@ const DECODE_AT_MS = 520;
 const CLEAR_AT_MS = 1300;
 const DECODE_STAGGER_MS = 160;
 
+// A long article has enough blocks that the design's stagger would still be
+// unwinding seconds later, so scrolling down would land in scrambled copy.
+const MAX_CASCADE_MS = 1800;
+
 function glyph(): string {
   return GLYPHS[(Math.random() * GLYPHS.length) | 0];
 }
@@ -105,64 +109,112 @@ function frame(now: number): void {
   frameHandle = 0;
 }
 
-// The swapped-in DOM carries its real text, so blank the targets the moment
-// the swap lands. Waiting for the decode beat would show the finished line
-// first and then visibly un-write it.
-function mask(element: HTMLElement): void {
-  const text = element.dataset.decodeText ?? element.textContent ?? "";
-
-  // Cache the real text so a second pass never captures a scrambled frame.
-  element.dataset.decodeText = text;
-
-  // The scramble tail is shorter than the final string, so hold the box open
-  // to keep the rest of the page from jumping while the line resolves.
-  element.style.minHeight = `${element.getBoundingClientRect().height}px`;
-  element.style.color = "var(--color-gate)";
-  element.textContent = "";
+// A decode target keeps its element's text nodes, so links, <strong>, and the
+// telemetry spans survive: rewriting textContent would flatten them away.
+interface Target {
+  element: HTMLElement;
+  nodes: Text[];
+  originals: string[];
+  length: number;
 }
 
-function decode(element: HTMLElement, delay: number): void {
-  const text = element.dataset.decodeText ?? element.textContent ?? "";
-  const characters = text.split("");
+const SCRAMBLE = 6;
 
+function snapshot(element: HTMLElement): Target {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  const nodes: Text[] = [];
+
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    nodes.push(node as Text);
+  }
+
+  const originals = nodes.map((node) => node.nodeValue ?? "");
+
+  return {
+    element,
+    nodes,
+    originals,
+    length: originals.reduce((sum, value) => sum + value.length, 0),
+  };
+}
+
+// Characters before the cursor are final and those past the scramble window
+// are not drawn yet, so only the few in between are rebuilt each frame.
+function paint(target: Target, landed: number): void {
+  let cursor = 0;
+
+  for (let i = 0; i < target.nodes.length; i += 1) {
+    const original = target.originals[i];
+    const local = landed - cursor;
+    let value: string;
+
+    if (local >= original.length) {
+      value = original;
+    } else if (local + SCRAMBLE <= 0) {
+      value = "";
+    } else {
+      const kept = Math.max(0, local);
+      const end = Math.min(original.length, local + SCRAMBLE);
+      let noise = "";
+
+      for (let j = kept; j < end; j += 1) {
+        noise += original[j] === " " ? " " : glyph();
+      }
+
+      value = original.slice(0, kept) + noise;
+    }
+
+    if (target.nodes[i].nodeValue !== value) {
+      target.nodes[i].nodeValue = value;
+    }
+
+    cursor += original.length;
+  }
+}
+
+function decode(target: Target, delay: number): void {
   // Drive the reveal from elapsed time, not a per-frame counter: a throttled
   // or slow frame rate would otherwise stretch the decode past the curtain.
-  // Hold the design's cadence, but never overrun the clear beat — which is
-  // what left long headlines resolving in the open.
-  const cadenceMs = (characters.length / 0.9) * 16.7;
+  // Hold the design's cadence, but never overrun the clear beat.
+  const cadenceMs = (target.length / 0.9) * 16.7;
   const budgetMs = Math.max(240, CLEAR_AT_MS - DECODE_AT_MS - delay);
   const durationMs = Math.min(cadenceMs, budgetMs);
   const startAt = performance.now() + delay;
 
   function step(now: number): void {
-    const landed = Math.floor(((now - startAt) / durationMs) * characters.length);
+    const landed = Math.floor(((now - startAt) / durationMs) * target.length);
 
-    if (landed < 0) {
-      element.textContent = "";
-      requestAnimationFrame(step);
+    if (landed >= target.length) {
+      paint(target, target.length);
+      target.element.style.removeProperty("color");
+      target.element.style.removeProperty("min-height");
       return;
     }
 
-    if (landed >= characters.length) {
-      element.textContent = text;
-      element.style.removeProperty("color");
-      element.style.removeProperty("min-height");
-      return;
-    }
-
-    element.textContent = characters
-      .map((character, index) => {
-        if (index < landed) return character;
-        if (index < landed + 6) return character === " " ? " " : glyph();
-        return "";
-      })
-      .join("");
-
-    element.style.color = "var(--color-gate)";
+    paint(target, landed);
     requestAnimationFrame(step);
   }
 
   requestAnimationFrame(step);
+}
+
+// Every block of copy in the main column, in document order. Blocks holding
+// other blocks are skipped so no text is claimed twice.
+function collectTargets(): HTMLElement[] {
+  const main = document.getElementById("main");
+  if (!main) {
+    return [];
+  }
+
+  const candidates = main.querySelectorAll<HTMLElement>(
+    "[data-decode], p, h1, h2, h3, h4, li, blockquote",
+  );
+
+  return [...candidates].filter(
+    (element) =>
+      !element.querySelector("p, h1, h2, h3, h4, li, blockquote") &&
+      (element.textContent ?? "").trim().length > 0,
+  );
 }
 
 function clearBeats(): void {
@@ -202,17 +254,39 @@ function resolveIncoming(): void {
 
   armed = false;
 
-  const targets = document.querySelectorAll<HTMLElement>("[data-decode]");
-  targets.forEach(mask);
+  const elements = collectTargets();
+
+  // Read every box before writing to any of them, so locking the heights open
+  // costs one layout pass instead of one per block.
+  const boxes = elements.map((element) => element.getBoundingClientRect());
+  const onScreen = boxes.filter((box) => box.top < window.innerHeight).length;
+
+  // The swapped-in DOM carries its real text, so blank the targets the moment
+  // the swap lands. Waiting for the beat would show each finished line first
+  // and then visibly un-write it.
+  const targets = elements.map((element, index) => {
+    const target = snapshot(element);
+    element.style.minHeight = `${boxes[index].height}px`;
+    element.style.color = "var(--color-gate)";
+    paint(target, -SCRAMBLE);
+    return target;
+  });
+
+  // Compress the stagger so everything on screen still starts inside the
+  // window; copy below the fold trails on afterwards, unseen.
+  const span = CLEAR_AT_MS - DECODE_AT_MS;
+  const stagger = Math.min(
+    DECODE_STAGGER_MS,
+    span / Math.max(1, onScreen),
+    MAX_CASCADE_MS / Math.max(1, targets.length),
+  );
 
   const elapsed = performance.now() - rainStart;
 
   beatTimers.push(
     window.setTimeout(
       () => {
-        targets.forEach((element, index) =>
-          decode(element, index * DECODE_STAGGER_MS),
-        );
+        targets.forEach((target, index) => decode(target, index * stagger));
 
         if (canvas) canvas.style.opacity = "0.45";
         if (veil) veil.style.opacity = "0.35";

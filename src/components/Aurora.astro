@@ -1,0 +1,82 @@
+---
+interface Props {
+  intensity?: "full" | "low" | "whisper";
+  variant?: "balanced" | "violet-heavy" | "cyan-heavy";
+  grid?: boolean;
+  backdrop?: string;
+  backdropPosition?: string;
+  backdropOpacity?: number;
+  parallax?: boolean;
+  class?: string;
+}
+
+const {
+  intensity = "full",
+  variant = "balanced",
+  grid,
+  backdrop,
+  backdropPosition = "center 42%",
+  backdropOpacity,
+  parallax = false,
+  class: className = "",
+} = Astro.props;
+
+const showGrid = grid ?? intensity !== "whisper";
+const resolvedBackdropOpacity =
+  backdropOpacity ??
+  (intensity === "full" ? 0.34 : intensity === "low" ? 0.28 : 0);
+---
+
+<div
+  class:list={["aurora", className]}
+  data-intensity={intensity}
+  data-variant={variant}
+  aria-hidden="true"
+>
+  {backdrop && (
+    parallax ? (
+      <div class="aurora-parallax-layer" data-parallax-speed="0.35">
+        <div
+          class="aurora-backdrop"
+          style={{
+            backgroundImage: `linear-gradient(180deg, var(--color-void) 0%, transparent 28%, transparent 72%, var(--color-void) 100%), linear-gradient(90deg, var(--color-void) 0%, transparent 22%, transparent 78%, var(--color-void) 100%), url(${backdrop})`,
+            backgroundPosition: `center, center, ${backdropPosition}`,
+            opacity: String(resolvedBackdropOpacity),
+          }}
+        />
+      </div>
+    ) : (
+      <div
+        class="aurora-backdrop"
+        style={{
+          backgroundImage: `linear-gradient(180deg, var(--color-void) 0%, transparent 28%, transparent 72%, var(--color-void) 100%), linear-gradient(90deg, var(--color-void) 0%, transparent 22%, transparent 78%, var(--color-void) 100%), url(${backdrop})`,
+          backgroundPosition: `center, center, ${backdropPosition}`,
+          opacity: String(resolvedBackdropOpacity),
+        }}
+      />
+    )
+  )}
+  {parallax ? (
+    <div class="aurora-parallax-layer" data-parallax-speed="0.55">
+      <div class="aurora-violet" />
+    </div>
+  ) : (
+    <div class="aurora-violet" />
+  )}
+  {parallax ? (
+    <div class="aurora-parallax-layer" data-parallax-speed="0.75">
+      <div class="aurora-cyan" />
+    </div>
+  ) : (
+    <div class="aurora-cyan" />
+  )}
+  {showGrid &&
+    (parallax ? (
+      <div class="aurora-parallax-layer" data-parallax-speed="0.2">
+        <div class="aurora-grid" />
+      </div>
+    ) : (
+      <div class="aurora-grid" />
+    ))}
+  <div class="aurora-fade" />
+</div>

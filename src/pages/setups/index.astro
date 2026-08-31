@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Aurora from "../../components/Aurora.astro";
 import SetupIndexRow from "../../components/SetupIndexRow.astro";
 import EmailBlock from "../../components/EmailBlock.astro";
 
@@ -39,10 +40,13 @@ const schema = {
   ogImage="/images/og-setups.png"
   schema={schema}
 >
-  <section class="wide-width mx-auto px-6 py-8">
+  <section class="relative overflow-hidden">
+    <Aurora intensity="whisper" variant="balanced" grid={true} />
+
+    <div class="wide-width relative mx-auto px-6 py-8">
     <header class="prose-width mb-12">
       <p class="eyebrow">The Setups</p>
-      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
+      <p class="prose-lead mt-6">
         Field notes from a company run on AI employees. Jobs, handoffs, what breaks, and what never gets handed to a bot.
       </p>
     </header>
@@ -62,6 +66,7 @@ const schema = {
         dek="A producer's complaint, a hand-picked crew, four days, a live directory."
         date="August 2026"
       />
+    </div>
     </div>
   </section>
 

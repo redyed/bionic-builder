@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Aurora from "../../components/Aurora.astro";
 import Figure from "../../components/Figure.astro";
 import EmailBlock from "../../components/EmailBlock.astro";
 
@@ -33,16 +34,19 @@ const schema = {
   schema={schema}
 >
   <article class="wide-width mx-auto px-6 py-8">
-    <header class="prose-width mb-12">
-      <p class="eyebrow">Setups · №1 · August 2026</p>
+    <header class="relative -mx-6 mb-12 overflow-hidden px-6 pb-10 pt-2">
+      <Aurora intensity="whisper" variant="balanced" grid={false} />
+
+      <div class="prose-width relative">
+        <p class="eyebrow">Setups · №1 · August 2026</p>
+        <h1 class="mt-6 font-display text-3xl font-extrabold leading-tight tracking-tight text-starlight sm:text-4xl">
+          Done Is a URL: The Four-Day Build of Tracked Vocals
+        </h1>
+      </div>
     </header>
 
     <div class="prose-width mx-auto">
-      <h1 class="font-display text-3xl font-extrabold leading-tight tracking-tight text-starlight sm:text-4xl">
-        Done Is a URL: The Four-Day Build of Tracked Vocals
-      </h1>
-
-      <div class="article-body mt-10 space-y-6">
+      <div class="article-body space-y-6">
         <p>This did not start with a strategy session. It started with me scrolling Instagram.</p>
 
         <p>
@@ -74,7 +78,7 @@ const schema = {
         <p>From there it entered the company.</p>
 
         <p>
-          Some context: I run my businesses on a 31-seat AI organization — 34 role playbooks, models from ten different labs, structured like an actual company with executives, departments, and gates. Publications, courses, software. What follows is one build moving through it.
+          Some context: I run my businesses on a <span class="telemetry">31-seat</span> AI organization — <span class="telemetry">34</span> role playbooks, models from <span class="telemetry">ten</span> different labs, structured like an actual company with executives, departments, and gates. Publications, courses, software. What follows is one build moving through it.
         </p>
 
         <p>
@@ -141,11 +145,11 @@ const schema = {
         <h2 class="pt-6 font-display text-2xl font-extrabold uppercase tracking-wide text-starlight">The math</h2>
 
         <p>
-          What it cost me: a few days, inside subscriptions I was already paying. For the record, the entire 31-seat company runs on about $170 a month — Claude Max, SuperGrok, Cursor, and Gemini Pro — plus roughly $35 in API credits spent to date, total.
+          What it cost me: a few days, inside subscriptions I was already paying. For the record, the entire <span class="telemetry">31-seat</span> company runs on about <span class="telemetry">$170</span> a month — Claude Max, SuperGrok, Cursor, and Gemini Pro — plus roughly <span class="telemetry">$35</span> in API credits spent to date, total.
         </p>
 
         <p>
-          What it would have cost the old way: I asked for an estimate of a traditional dev team building the same thing, and the answer came back around $70,000 and a timeline measured in months. That estimate came from an AI, so salt it however you like. The part that needs no salt: four days, and <a href="https://trackedvocals.com" target="_blank" rel="noopener" class="link">a URL you can visit</a>.
+          What it would have cost the old way: I asked for an estimate of a traditional dev team building the same thing, and the answer came back around <span class="telemetry">$70,000</span> and a timeline measured in months. That estimate came from an AI, so salt it however you like. The part that needs no salt: <span class="telemetry">four days</span>, and <a href="https://trackedvocals.com" target="_blank" rel="noopener" class="link">a URL you can visit</a>.
         </p>
 
         <h2 class="pt-6 font-display text-2xl font-extrabold uppercase tracking-wide text-starlight">What the army did not do</h2>
@@ -166,7 +170,7 @@ const schema = {
           I'm writing the setups down. Every seat, every handoff, what breaks, and the short list of things I will never hand to a bot. If you make real work and want the company around it to run without a headcount, that's what Bionic Builder is.
         </p>
 
-        <p class="pt-6 text-dim">
+        <p class="sign-off pt-6">
           Deyder Cintron is a producer — four Grammy-nominated records, 2.2B streams. The org ships. He signs what can be quoted.
         </p>
       </div>

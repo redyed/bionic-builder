@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Aurora from "../components/Aurora.astro";
 import GateLight from "../components/GateLight.astro";
 import Figure from "../components/Figure.astro";
 import LedgerRow from "../components/LedgerRow.astro";
@@ -43,33 +44,36 @@ const schema = [
   schema={schema}
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="aurora" aria-hidden="true">
-      <div class="aurora-violet"></div>
-      <div class="aurora-cyan"></div>
-      <div class="aurora-grid"></div>
-    </div>
+  <section class="relative overflow-hidden" data-parallax-root>
+    <Aurora
+      intensity="full"
+      variant="balanced"
+      backdrop="/images/hero-backdrop.webp"
+      backdropPosition="center 42%"
+      parallax={true}
+    />
 
     <div class="wide-width relative mx-auto px-6 pb-20 pt-4">
       <p class="eyebrow">Bionic Builder</p>
       <h1 class="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-starlight sm:text-5xl lg:text-6xl">
         Your company runs while the laptop is closed.
       </h1>
-      <p class="mt-6 max-w-2xl font-body text-xl font-medium leading-relaxed text-starlight sm:text-2xl">
-        AI employees ship the publications, courses, and software. No staff.
+      <p class="prose-lead-lg mt-6 max-w-2xl">
+        AI employees ship the publications, courses, and software.<br />
+        No staff.
       </p>
-      <p class="mt-3 font-body text-lg text-dim">
+      <p class="prose-dim mt-3">
         You keep the judgment.
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-6">
-        <a href="/setups" class="cta">
+        <a href="/setups" class="btn-primary">
           Read the setups
         </a>
         <GateLight label="Signed · D.C." pulse={true} />
       </div>
 
-      <p class="prose-width mt-12 font-body text-base text-dim">
-        Built and run by Deyder Cintron — producer, four Grammy-nominated records, 2.2B streams. The org ships the companies. He signs what can be quoted.
+      <p class="prose-dim prose-width mt-12">
+        Built and run by Deyder Cintron — producer, <span class="telemetry">4×</span> Grammy-nominated records, <span class="telemetry">2.2B</span> streams. The org ships the companies. He signs what can be quoted.
       </p>
     </div>
   </section>
@@ -78,10 +82,10 @@ const schema = [
   <section class="section-rule wide-width mx-auto px-6 py-16">
     <div class="prose-width">
       <p class="eyebrow">Who it's for</p>
-      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
+      <p class="prose-lead mt-6">
         For people who already make the work — a magazine, a practice, a product — and are done being the bottleneck.
       </p>
-      <p class="mt-4 font-body text-xl font-medium leading-relaxed text-starlight">
+      <p class="prose-lead mt-4">
         If you only make prompts, this isn't for you. If you have to ship an issue, a cohort, or a tool on Tuesday, it is.
       </p>
     </div>
@@ -90,66 +94,110 @@ const schema = [
   <!-- What the employees are for -->
   <section class="wide-width mx-auto px-6 py-16">
     <div class="grid gap-6 md:grid-cols-3">
-      <article class="panel p-6">
-        <p class="font-data text-sm text-dim">01</p>
-        <h2 class="mt-4 font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Publish</h2>
-        <p class="mt-3 font-body text-lg leading-relaxed text-starlight">
-          Issues, posts, and pages that go live. Not drafts that die in a folder.
-        </p>
+      <article class="panel overflow-hidden">
+        <img
+          src="/images/card-publish.webp"
+          alt=""
+          width={1024}
+          height={576}
+          loading="lazy"
+          class="cinematic-img card-cinematic"
+        />
+        <div class="p-6 pt-5">
+          <h2 class="font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Publish</h2>
+          <p class="mt-3">
+            Issues, posts, and pages that go live. Not drafts that die in a folder.
+          </p>
+        </div>
       </article>
 
-      <article class="panel p-6">
-        <p class="font-data text-sm text-dim">02</p>
-        <h2 class="mt-4 font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Product</h2>
-        <p class="mt-3 font-body text-lg leading-relaxed text-starlight">
-          Courses, waitlists, and software people can actually use.
-        </p>
+      <article class="panel overflow-hidden">
+        <img
+          src="/images/card-product.webp"
+          alt=""
+          width={1024}
+          height={576}
+          loading="lazy"
+          class="cinematic-img card-cinematic"
+        />
+        <div class="p-6 pt-5">
+          <h2 class="font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Product</h2>
+          <p class="mt-3">
+            Courses, waitlists, and software people can actually use.
+          </p>
+        </div>
       </article>
 
-      <article class="panel p-6">
-        <p class="font-data text-sm text-dim">03</p>
-        <h2 class="mt-4 font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Operate</h2>
-        <p class="mt-3 font-body text-lg leading-relaxed text-starlight">
-          Research, design, handoffs — so you're not the paste layer between models.
-        </p>
+      <article class="panel overflow-hidden">
+        <img
+          src="/images/card-operate.webp"
+          alt=""
+          width={1024}
+          height={576}
+          loading="lazy"
+          class="cinematic-img card-cinematic"
+        />
+        <div class="p-6 pt-5">
+          <h2 class="font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Operate</h2>
+          <p class="mt-3">
+            Research, design, handoffs — so you're not the paste layer between models.
+          </p>
+        </div>
       </article>
     </div>
   </section>
 
   <!-- The shop floor -->
-  <section class="section-rule wide-width mx-auto px-6 py-16">
+  <section class="section-rule relative overflow-hidden">
+    <Aurora intensity="low" variant="violet-heavy" grid={true} />
+
+    <div class="wide-width relative mx-auto px-6 py-16">
     <div class="prose-width">
       <p class="eyebrow">The shop floor</p>
-      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
-        Not a prompt library. An organization — 31 seats across ten AI labs, run like a company because it is one.
+      <p class="prose-lead mt-6">
+        Not a prompt library. An organization — <span class="telemetry">31 seats</span> across <span class="telemetry">ten</span> AI labs, run like a company because it is one.
       </p>
     </div>
 
+    <div class="panel mt-10 max-w-4xl overflow-hidden" data-parallax-image>
+      <img
+        src="/images/shopfloor.webp"
+        alt="Rows of automated workstations receding into a dark factory floor, lit by violet and cyan."
+        width={1024}
+        height={576}
+        loading="lazy"
+        class="cinematic-img parallax-image"
+        data-parallax-image-target
+        data-parallax-speed="1"
+      />
+    </div>
+
     <div class="mt-10 max-w-3xl">
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
+      <div class="section-rule py-4">
         Approval gates on send, spend, and publish — nothing irreversible happens without a human.
       </div>
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
+      <div class="section-rule py-4">
         A value ledger — every week, what shipped and what it was worth, in numbers.
       </div>
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
+      <div class="section-rule py-4">
         An auditor that never shares a lab with the work it audits.
       </div>
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
+      <div class="section-rule py-4">
         Done = a URL — a file nobody was told about does not count.
       </div>
     </div>
 
     <div class="panel relative mt-12 max-w-3xl p-8">
       <GateLight label="Reviewed" class="mb-5" />
-      <blockquote class="font-body text-xl font-medium leading-relaxed text-starlight">
+      <blockquote class="prose-lead">
         "The system assumes agents fail. The gates exist so failures die in review, not in public."
       </blockquote>
     </div>
 
-    <p class="prose-width mt-8 font-body text-base text-dim">
+    <p class="prose-dim prose-width mt-8">
       Every rule in this shop is a tombstone — sessions rot, ghost profiles respawn, and the rules exist because something broke.
     </p>
+    </div>
   </section>
 
   <!-- Receipts -->
@@ -193,20 +241,33 @@ const schema = [
   </section>
 
   <!-- The setups -->
-  <section class="section-rule wide-width mx-auto px-6 py-16">
+  <section class="section-rule relative overflow-hidden">
+    <Aurora
+      intensity="low"
+      variant="balanced"
+      backdrop="/images/setups-backdrop.webp"
+      backdropPosition="center center"
+    />
+
+    <div class="wide-width relative mx-auto px-6 py-16">
     <div class="prose-width">
       <h2 class="font-display text-3xl font-extrabold uppercase tracking-wide text-starlight">The setups</h2>
-      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
+      <p class="prose-lead mt-6">
         Every setup used to run the shop. Jobs, handoffs, what breaks, and what never gets handed to a bot.
       </p>
-      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
+      <p class="prose-lead mt-6">
         I moved in early and kept the receipts. Come look.
       </p>
-      <a href="/setups" class="cta mt-8">
+      <a href="/setups" class="btn-primary mt-8">
         Read the setups
       </a>
+    </div>
     </div>
   </section>
 
   <EmailBlock />
 </Layout>
+
+<script>
+  import "../scripts/parallax.ts";
+</script>

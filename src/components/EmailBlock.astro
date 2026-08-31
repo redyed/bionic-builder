@@ -1,42 +1,50 @@
 ---
+import Aurora from "./Aurora.astro";
+
 const FORM_ACTION_URL = "https://app.loops.so/api/newsletter-form/cmtfjkk8e04k90j065p9e2mq0";
 ---
 
-<section class="prose-width mx-auto px-6 py-16" aria-labelledby="email-heading">
-  <h2 id="email-heading" class="font-display text-2xl font-extrabold uppercase tracking-wide text-starlight">
-    Send the next one.
-  </h2>
-  <p class="mt-4 font-body text-xl font-medium leading-relaxed text-starlight">
-    New setups from the shop — jobs, handoffs, what breaks, what never gets handed to a bot.
-  </p>
+<section class="relative overflow-hidden" aria-labelledby="email-heading">
+  <Aurora intensity="whisper" variant="cyan-heavy" grid={false} />
 
-  <form
-    id="email-form"
-    class="mt-8 flex flex-col gap-4 sm:flex-row"
-    method="POST"
-    action={FORM_ACTION_URL}
-  >
-    <label for="email-input" class="sr-only">Email address</label>
-    <input
-      id="email-input"
-      name="email"
-      type="email"
-      required
-      placeholder="you@example.com"
-      class="min-w-0 flex-1 rounded border border-line bg-panel px-4 py-3 font-body text-lg text-starlight placeholder:text-dim focus:border-starlight focus:outline-none"
-    />
-    <input type="hidden" name="userGroup" value="site" />
-    <button type="submit" class="cta">
-      Get the next setup
-    </button>
-  </form>
+  <div class="wide-width relative mx-auto px-6 py-16">
+    <div class="prose-width">
+      <h2 id="email-heading" class="font-display text-2xl font-extrabold uppercase tracking-wide text-starlight">
+        Send the next one.
+      </h2>
+      <p class="prose-lead mt-4">
+        New setups from the shop — jobs, handoffs, what breaks, what never gets handed to a bot.
+      </p>
 
-  <p id="email-success" class="mt-4 hidden font-body text-base text-starlight" role="status">
-    Done — the next setup will land in your inbox.
-  </p>
-  <p id="email-error" class="mt-4 hidden font-body text-base text-dim" role="alert">
-    That address didn't go through. Check it and try again.
-  </p>
+      <form
+        id="email-form"
+        class="mt-8 flex flex-col gap-4 sm:flex-row"
+        method="POST"
+        action={FORM_ACTION_URL}
+      >
+        <label for="email-input" class="sr-only">Email address</label>
+        <input
+          id="email-input"
+          name="email"
+          type="email"
+          required
+          placeholder="you@example.com"
+          class="min-w-0 flex-1 rounded border border-line bg-panel px-4 py-3 font-body text-lg text-starlight placeholder:text-dim focus:border-starlight focus:outline-none"
+        />
+        <input type="hidden" name="userGroup" value="site" />
+        <button type="submit" class="btn-primary">
+          Get the next setup
+        </button>
+      </form>
+
+      <p id="email-success" class="mt-4 hidden font-body text-base text-starlight" role="status">
+        Done — the next setup will land in your inbox.
+      </p>
+      <p id="email-error" class="mt-4 hidden font-body text-base text-dim" role="alert">
+        That address didn't go through. Check it and try again.
+      </p>
+    </div>
+  </div>
 </section>
 
 <script>

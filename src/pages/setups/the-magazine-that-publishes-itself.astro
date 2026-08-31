@@ -2,6 +2,7 @@
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import Layout from "../../layouts/Layout.astro";
+import Aurora from "../../components/Aurora.astro";
 import Figure from "../../components/Figure.astro";
 import EmailBlock from "../../components/EmailBlock.astro";
 
@@ -39,16 +40,19 @@ const schema = {
   schema={schema}
 >
   <article class="wide-width mx-auto px-6 py-8">
-    <header class="prose-width mb-12">
-      <p class="eyebrow">Setups · №2 · August 2026</p>
+    <header class="relative -mx-6 mb-12 overflow-hidden px-6 pb-10 pt-2">
+      <Aurora intensity="whisper" variant="balanced" grid={false} />
+
+      <div class="prose-width relative">
+        <p class="eyebrow">Setups · №2 · August 2026</p>
+        <h1 class="mt-6 font-display text-3xl font-extrabold leading-tight tracking-tight text-starlight sm:text-4xl">
+          The Magazine That Publishes Itself
+        </h1>
+      </div>
     </header>
 
     <div class="prose-width mx-auto">
-      <h1 class="font-display text-3xl font-extrabold leading-tight tracking-tight text-starlight sm:text-4xl">
-        The Magazine That Publishes Itself
-      </h1>
-
-      <div class="article-body mt-10 space-y-6">
+      <div class="article-body space-y-6">
         <p>An issue of my magazine went out this morning. I haven't read it yet.</p>
 
         <p>
@@ -62,7 +66,7 @@ const schema = {
         <h2 class="pt-6 font-display text-2xl font-extrabold uppercase tracking-wide text-starlight">Fifty issues by hand</h2>
 
         <p>
-          Before anything was automated, I published about fifty articles through the manual version of the process. Me, driving every step: what to cover, who drafts, who edits, what ships.
+          Before anything was automated, I published about <span class="telemetry">fifty</span> articles through the manual version of the process. Me, driving every step: what to cover, who drafts, who edits, what ships.
         </p>
 
         <p>
@@ -90,7 +94,7 @@ const schema = {
         <h2 class="pt-6 font-display text-2xl font-extrabold uppercase tracking-wide text-starlight">The throttle</h2>
 
         <p>
-          Here's the number people don't expect: <strong>six to ten articles a week.</strong> Not because that's the ceiling — the line could do multiples of that. We cap it on purpose, because publishing faster than trust accrues gets you filed under spam farm by the search engines, and being technically able to flood the internet is not the same as it being wise.
+          Here's the number people don't expect: <strong><span class="telemetry">six to ten</span> articles a week.</strong> Not because that's the ceiling — the line could do multiples of that. We cap it on purpose, because publishing faster than trust accrues gets you filed under spam farm by the search engines, and being technically able to flood the internet is not the same as it being wise.
         </p>
 
         <p>
@@ -155,7 +159,7 @@ const schema = {
           I'm writing all of it down. Every seat, every handoff, what breaks, and what never gets handed to a bot.
         </p>
 
-        <p class="pt-6 text-dim">
+        <p class="sign-off pt-6">
           Deyder Cintron is a producer — four Grammy-nominated records, 2.2B streams. The org ships. He signs what can be quoted.
         </p>
       </div>

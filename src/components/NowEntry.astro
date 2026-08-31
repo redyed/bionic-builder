@@ -17,7 +17,7 @@ const { id, weekOf, subtitle, rows } = Astro.props;
       Week of {weekOf}
     </h2>
     {subtitle && (
-      <p class="mt-1 font-body text-base text-dim">{subtitle}</p>
+      <p class="mt-1 prose-dim">{subtitle}</p>
     )}
   </header>
   {rows.map((row) => (

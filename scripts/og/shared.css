@@ -129,7 +129,8 @@ h1.compact {
   gap: 10px;
 }
 
-.mark svg {
+.mark img,
+.mark {
   display: block;
 }
 

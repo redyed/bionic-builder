@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Aurora from "../components/Aurora.astro";
 import NowEntry from "../components/NowEntry.astro";
 import { nowEntries } from "../data/now-entries";
 
@@ -22,10 +23,13 @@ const schema = {
   ogImage="/images/og-now.png"
   schema={schema}
 >
-  <section class="wide-width mx-auto px-6 py-16">
+  <section class="relative overflow-hidden">
+    <Aurora intensity="whisper" variant="cyan-heavy" grid={true} />
+
+    <div class="wide-width relative mx-auto px-6 py-16">
     <div class="prose-width">
       <h1 class="font-display text-4xl font-extrabold uppercase tracking-wide text-starlight">Now</h1>
-      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
+      <p class="prose-lead mt-6">
         The weekly value ledger. What shipped, what it was worth. Real numbers, updated weekly.
       </p>
     </div>
@@ -39,6 +43,7 @@ const schema = {
           rows={entry.rows}
         />
       ))}
+    </div>
     </div>
   </section>
 </Layout>

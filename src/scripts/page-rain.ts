@@ -14,6 +14,20 @@ function glyph(): string {
   return GLYPHS[(Math.random() * GLYPHS.length) | 0];
 }
 
+function normalize(path: string): string {
+  return path.replace(/\/$/, "") || "/";
+}
+
+// The homepage runs its own boot sequence on arrival, so the rain is scoped to
+// departures from it rather than firing on every swap.
+function leavingHome(from: URL | undefined, to: URL | undefined): boolean {
+  if (!from || !to) {
+    return false;
+  }
+
+  return normalize(from.pathname) === "/" && normalize(to.pathname) !== "/";
+}
+
 function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -30,6 +44,7 @@ let frameHandle = 0;
 let runUntil = 0;
 let rainStart = 0;
 let beatTimers: number[] = [];
+let armed = false;
 
 function measure(): void {
   if (!canvas || !ctx) {
@@ -166,9 +181,11 @@ function startRain(path: string): void {
 }
 
 function resolveIncoming(): void {
-  if (!canvas || !veil || prefersReducedMotion()) {
+  if (!armed || !canvas || !veil || prefersReducedMotion()) {
     return;
   }
+
+  armed = false;
 
   const elapsed = performance.now() - rainStart;
 
@@ -212,8 +229,12 @@ export function initPageRain(): void {
   window.addEventListener("resize", measure);
 
   document.addEventListener("astro:before-preparation", (event) => {
-    const to = (event as Event & { to?: URL }).to;
-    startRain(to ? to.pathname : location.pathname);
+    const { from, to } = event as Event & { from?: URL; to?: URL };
+
+    armed = leavingHome(from, to);
+    if (armed && to) {
+      startRain(normalize(to.pathname));
+    }
   });
 
   document.addEventListener("astro:after-swap", resolveIncoming);

@@ -923,3 +923,74 @@
     -webkit-backdrop-filter: none;
   }
 }
+
+/* Page swap: rain canvas, route log, and the view transition itself. */
+
+#page-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+#page-rain.is-active {
+  opacity: 1;
+}
+
+#page-route-log {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.5rem;
+  z-index: 61;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-gate);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--color-gate) 40%, transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+#page-route-log.is-active {
+  opacity: 1;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(14px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: page-out 260ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 460ms cubic-bezier(0.16, 1, 0.3, 1) 260ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-rain,
+  #page-route-log {
+    display: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

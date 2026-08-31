@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -31,6 +32,7 @@ const fullOgImageUrl = new URL(ogImage, siteUrl).href;
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <ClientRouter />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -64,6 +66,8 @@ const fullOgImageUrl = new URL(ogImage, siteUrl).href;
     )}
   </head>
   <body>
+    <canvas id="page-rain" aria-hidden="true" transition:persist></canvas>
+    <p id="page-route-log" aria-hidden="true" transition:persist></p>
     <Nav />
     <main id="main">
       <slot />
@@ -72,6 +76,7 @@ const fullOgImageUrl = new URL(ogImage, siteUrl).href;
     <script>
       import "../scripts/btn-primary-sheen.ts";
       import "../scripts/telemetry-count.ts";
+      import "../scripts/page-rain.ts";
     </script>
   </body>
 </html>

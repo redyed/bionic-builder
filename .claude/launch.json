@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bionic-builder",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["astro", "dev"],
+      "autoPort": true
+    }
+  ]
+}

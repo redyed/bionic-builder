@@ -924,39 +924,51 @@
   }
 }
 
-/* Page swap: rain canvas, route log, and the view transition itself. */
+/* Page swap: veil, rain canvas, route log, and the view transition itself. */
 
-#page-rain {
+#page-veil {
   position: fixed;
   inset: 0;
   z-index: 60;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 240ms ease;
+  transition: opacity 260ms ease;
+  background:
+    radial-gradient(
+      120% 90% at 50% 0%,
+      color-mix(in srgb, var(--color-gate) 12%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-void) 88%, transparent),
+      color-mix(in srgb, var(--color-void) 96%, transparent)
+    );
 }
 
-#page-rain.is-active {
-  opacity: 1;
+#page-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 61;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
 }
 
 #page-route-log {
   position: fixed;
-  bottom: 1.25rem;
-  left: 1.5rem;
-  z-index: 61;
+  left: 24px;
+  bottom: 16px;
+  z-index: 62;
   margin: 0;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
   color: var(--color-gate);
-  text-shadow: 0 0 12px color-mix(in srgb, var(--color-gate) 40%, transparent);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 240ms ease;
-}
-
-#page-route-log.is-active {
-  opacity: 1;
+  transition: opacity 200ms ease;
 }
 
 @keyframes page-out {
@@ -984,6 +996,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  #page-veil,
   #page-rain,
   #page-route-log {
     display: none;

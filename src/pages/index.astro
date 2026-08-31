@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import StampBadge from "../components/StampBadge.astro";
+import GateLight from "../components/GateLight.astro";
 import Figure from "../components/Figure.astro";
 import LedgerRow from "../components/LedgerRow.astro";
 import EmailBlock from "../components/EmailBlock.astro";
@@ -43,54 +43,45 @@ const schema = [
   schema={schema}
 >
   <!-- Hero -->
-  <section class="wide-width mx-auto px-6 pb-16 pt-4">
-    <div class="grid items-center gap-12 lg:grid-cols-2">
-      <div class="prose-width">
-        <p class="eyebrow">Bionic Builder</p>
-        <h1 class="mt-4 font-display text-4xl font-black leading-tight tracking-tight text-ink sm:text-5xl">
-          Run your company on AI employees.
-        </h1>
-        <p class="mt-6 font-body text-2xl leading-relaxed text-ink">
-          No headcount. You keep the judgment.
-        </p>
-        <p class="mt-4 font-body text-lg leading-relaxed text-ink">
-          Publications, courses, software — live URLs, not chat logs. The whole org runs on about $170 a month.
-        </p>
-        <a
-          href="/setups"
-          class="mt-8 inline-block bg-stamp px-6 py-3 font-display text-sm font-black uppercase tracking-wider text-paper no-underline hover:opacity-90"
-        >
-          Read the setups
-        </a>
-      </div>
-
-      <div class="relative">
-        <Figure
-          src="/images/hero.webp"
-          alt="Patent-style drawing of documents moving along a machine line toward a gate, where a human hand applies a red approval stamp."
-          width={1200}
-          height={896}
-          loading="eager"
-        />
-        <div class="absolute -bottom-4 -right-2 sm:-right-6">
-          <StampBadge text="Signed · D.C." animate={true} />
-        </div>
-      </div>
+  <section class="relative overflow-hidden">
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-violet"></div>
+      <div class="aurora-cyan"></div>
+      <div class="aurora-grid"></div>
     </div>
 
-    <p class="prose-width mt-12 font-body text-base text-muted">
-      Built and run by Deyder Cintron — producer, four Grammy-nominated records, 2.2B streams. The org ships the companies. He signs what can be quoted.
-    </p>
+    <div class="wide-width relative mx-auto px-6 pb-20 pt-4">
+      <p class="eyebrow">Bionic Builder</p>
+      <h1 class="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-starlight sm:text-5xl lg:text-6xl">
+        Your company runs while the laptop is closed.
+      </h1>
+      <p class="mt-6 max-w-2xl font-body text-xl font-medium leading-relaxed text-starlight sm:text-2xl">
+        AI employees ship the publications, courses, and software. No staff.
+      </p>
+      <p class="mt-3 font-body text-lg text-dim">
+        You keep the judgment.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-6">
+        <a href="/setups" class="cta">
+          Read the setups
+        </a>
+        <GateLight label="Signed · D.C." pulse={true} />
+      </div>
+
+      <p class="prose-width mt-12 font-body text-base text-dim">
+        Built and run by Deyder Cintron — producer, four Grammy-nominated records, 2.2B streams. The org ships the companies. He signs what can be quoted.
+      </p>
+    </div>
   </section>
 
   <!-- Who it's for -->
   <section class="section-rule wide-width mx-auto px-6 py-16">
     <div class="prose-width">
       <p class="eyebrow">Who it's for</p>
-      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
         For people who already make the work — a magazine, a practice, a product — and are done being the bottleneck.
       </p>
-      <p class="mt-4 font-body text-xl leading-relaxed text-ink">
+      <p class="mt-4 font-body text-xl font-medium leading-relaxed text-starlight">
         If you only make prompts, this isn't for you. If you have to ship an issue, a cohort, or a tool on Tuesday, it is.
       </p>
     </div>
@@ -98,42 +89,27 @@ const schema = [
 
   <!-- What the employees are for -->
   <section class="wide-width mx-auto px-6 py-16">
-    <div class="grid gap-12 md:grid-cols-3">
-      <article>
-        <Figure
-          src="/images/card-publish.webp"
-          alt="Line drawing of a printed page rolling off a small press."
-          width={1024}
-          height={1024}
-        />
-        <h2 class="mt-6 font-display text-xl font-black uppercase tracking-wide text-ink">Publish</h2>
-        <p class="mt-3 font-body text-lg leading-relaxed text-ink">
+    <div class="grid gap-6 md:grid-cols-3">
+      <article class="panel p-6">
+        <p class="font-data text-sm text-dim">01</p>
+        <h2 class="mt-4 font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Publish</h2>
+        <p class="mt-3 font-body text-lg leading-relaxed text-starlight">
           Issues, posts, and pages that go live. Not drafts that die in a folder.
         </p>
       </article>
 
-      <article>
-        <Figure
-          src="/images/card-product.webp"
-          alt="Line drawing of a wrapped parcel with a shipping tag."
-          width={1024}
-          height={1024}
-        />
-        <h2 class="mt-6 font-display text-xl font-black uppercase tracking-wide text-ink">Product</h2>
-        <p class="mt-3 font-body text-lg leading-relaxed text-ink">
+      <article class="panel p-6">
+        <p class="font-data text-sm text-dim">02</p>
+        <h2 class="mt-4 font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Product</h2>
+        <p class="mt-3 font-body text-lg leading-relaxed text-starlight">
           Courses, waitlists, and software people can actually use.
         </p>
       </article>
 
-      <article>
-        <Figure
-          src="/images/card-operate.webp"
-          alt="Line drawing of a control panel with a single lever and an indicator."
-          width={1024}
-          height={1024}
-        />
-        <h2 class="mt-6 font-display text-xl font-black uppercase tracking-wide text-ink">Operate</h2>
-        <p class="mt-3 font-body text-lg leading-relaxed text-ink">
+      <article class="panel p-6">
+        <p class="font-data text-sm text-dim">03</p>
+        <h2 class="mt-4 font-display text-xl font-extrabold uppercase tracking-wide text-starlight">Operate</h2>
+        <p class="mt-3 font-body text-lg leading-relaxed text-starlight">
           Research, design, handoffs — so you're not the paste layer between models.
         </p>
       </article>
@@ -144,36 +120,34 @@ const schema = [
   <section class="section-rule wide-width mx-auto px-6 py-16">
     <div class="prose-width">
       <p class="eyebrow">The shop floor</p>
-      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
         Not a prompt library. An organization — 31 seats across ten AI labs, run like a company because it is one.
       </p>
     </div>
 
     <div class="mt-10 max-w-3xl">
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
         Approval gates on send, spend, and publish — nothing irreversible happens without a human.
       </div>
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
         A value ledger — every week, what shipped and what it was worth, in numbers.
       </div>
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
         An auditor that never shares a lab with the work it audits.
       </div>
-      <div class="section-rule py-4 font-body text-lg leading-relaxed text-ink">
+      <div class="section-rule py-4 font-body text-lg leading-relaxed text-starlight">
         Done = a URL — a file nobody was told about does not count.
       </div>
     </div>
 
-    <div class="relative mt-12 max-w-3xl border border-rule p-8">
-      <blockquote class="font-body text-xl leading-relaxed text-ink">
+    <div class="panel relative mt-12 max-w-3xl p-8">
+      <GateLight label="Reviewed" class="mb-5" />
+      <blockquote class="font-body text-xl font-medium leading-relaxed text-starlight">
         "The system assumes agents fail. The gates exist so failures die in review, not in public."
       </blockquote>
-      <div class="absolute -top-5 right-6">
-        <StampBadge text="Reviewed" />
-      </div>
     </div>
 
-    <p class="prose-width mt-8 font-body text-base text-muted">
+    <p class="prose-width mt-8 font-body text-base text-dim">
       Every rule in this shop is a tombstone — sessions rot, ghost profiles respawn, and the rules exist because something broke.
     </p>
   </section>
@@ -213,6 +187,7 @@ const schema = [
         imgStyle="width: 409px; height: 512px;"
         figureClass="mx-auto flex w-fit flex-col items-center"
         caption="MUSO.AI credits — 210 credits, 96% above industry average."
+        framed={true}
       />
     </div>
   </section>
@@ -220,14 +195,14 @@ const schema = [
   <!-- The setups -->
   <section class="section-rule wide-width mx-auto px-6 py-16">
     <div class="prose-width">
-      <h2 class="font-display text-3xl font-black uppercase tracking-wide text-ink">The setups</h2>
-      <p class="mt-6 font-body text-xl leading-relaxed text-ink">
+      <h2 class="font-display text-3xl font-extrabold uppercase tracking-wide text-starlight">The setups</h2>
+      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
         Every setup used to run the shop. Jobs, handoffs, what breaks, and what never gets handed to a bot.
       </p>
-      <a
-        href="/setups"
-        class="mt-8 inline-block bg-stamp px-6 py-3 font-display text-sm font-black uppercase tracking-wider text-paper no-underline hover:opacity-90"
-      >
+      <p class="mt-6 font-body text-xl font-medium leading-relaxed text-starlight">
+        I moved in early and kept the receipts. Come look.
+      </p>
+      <a href="/setups" class="cta mt-8">
         Read the setups
       </a>
     </div>

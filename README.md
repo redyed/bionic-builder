@@ -6,12 +6,12 @@ Static site for [thebionicbuilder.com](https://thebionicbuilder.com) — built w
 
 - Astro (static output)
 - Tailwind CSS v4
-- Fontsource: Archivo + Source Serif 4
+- Fontsource: Archivo + IBM Plex Mono
 
 ## Pages
 
 - `/` — homepage
-- `/setups` — Setup №1 article
+- `/setups` — setups index and articles
 - `/now` — weekly value ledger
 
 ## Development
@@ -20,13 +20,6 @@ Static site for [thebionicbuilder.com](https://thebionicbuilder.com) — built w
 npm install
 npm run dev
 ```
-
-## Before deploy
-
-1. Set `FORM_ACTION_URL` in `src/components/EmailBlock.astro` to your email provider endpoint.
-2. Drop generated images into `public/images/` (`hero.webp`, `card-*.webp`, `og.png`).
-3. Add founder-supplied screenshots: `receipt-real.webp`, `tv-desktop.webp`.
-4. Optional logo drop-in: `logo-mark.svg` or `logo-mark.webp` in `public/images/`.
 
 ## Deploy
 

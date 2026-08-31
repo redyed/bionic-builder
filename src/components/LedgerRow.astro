@@ -19,15 +19,15 @@ const {
   suffixHref,
 } = Astro.props;
 
-const linkClass = "text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp";
+const linkClass = "link";
 
 function externalAttrs(url?: string) {
   return url?.startsWith("http") ? { target: "_blank", rel: "noopener" } : {};
 }
 ---
 
-<div class:list={["section-rule flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between", muted && "text-muted"]}>
-  <span class="font-body text-lg">
+<div class:list={["section-rule flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between", muted && "text-dim"]}>
+  <span class:list={["font-body text-[17px] font-normal", muted ? "text-dim" : "text-starlight"]}>
     {labelHref ? (
       <>
         <a href={labelHref} class={linkClass} {...externalAttrs(labelHref)}>{label}</a>
@@ -45,6 +45,8 @@ function externalAttrs(url?: string) {
     )}
   </span>
   {value && (
-    <span class="font-data shrink-0 text-base sm:text-right">{value}</span>
+    <span class:list={["font-data shrink-0 text-sm sm:text-right", muted ? "text-dim" : "text-cyan"]}>
+      {value}
+    </span>
   )}
 </div>

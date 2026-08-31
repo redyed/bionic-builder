@@ -8,19 +8,18 @@ interface Props {
 }
 
 const { number, title, href, dek, date } = Astro.props;
-const linkClass = "text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp";
 ---
 
 <div class="section-rule py-4">
   <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
     <div class="min-w-0">
-      <p class="font-body text-lg leading-relaxed text-ink">
+      <p class="font-body text-[17px] font-normal leading-relaxed text-starlight">
         <span class="font-data">{number}</span>
         {" — "}
-        <a href={href} class={linkClass}>{title}</a>
+        <a href={href} class="link">{title}</a>
       </p>
-      <p class="mt-1 font-body text-base text-muted">{dek}</p>
+      <p class="mt-1 font-body text-base text-dim">{dek}</p>
     </div>
-    <span class="font-data shrink-0 text-base text-muted">{date}</span>
+    <span class="font-data shrink-0 text-sm text-cyan">{date}</span>
   </div>
 </div>

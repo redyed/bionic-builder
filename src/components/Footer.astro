@@ -1,24 +1,24 @@
 ---
-import StampBadge from "./StampBadge.astro";
+import GateLight from "./GateLight.astro";
 ---
 
 <footer class="wide-width mx-auto px-6 pb-16 pt-12">
   <div class="section-rule pt-12">
     <div class="flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
-      <p class="font-body text-base text-muted">
+      <p class="font-body text-base text-dim">
         Deyder Cintron ·
-        <a href="https://x.com/deydercintron" target="_blank" rel="noopener" class="text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp">
+        <a href="https://x.com/deydercintron" target="_blank" rel="noopener" class="link">
           X @deydercintron
         </a>
         · Music:
-        <a href="https://deydercintron.com" target="_blank" rel="noopener" class="text-ink underline decoration-rule underline-offset-4 hover:text-stamp hover:decoration-stamp">
+        <a href="https://deydercintron.com" target="_blank" rel="noopener" class="link">
           deydercintron.com
         </a>
       </p>
-      <StampBadge
-        text="Built by the org"
-        subline="This site was built by the org it describes."
-      />
+      <div class="flex flex-col items-start gap-2 md:items-end">
+        <GateLight label="Built by the org" />
+        <p class="font-body text-sm text-dim">This site was built by the org it describes.</p>
+      </div>
     </div>
   </div>
 </footer>

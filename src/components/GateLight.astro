@@ -1,0 +1,16 @@
+---
+interface Props {
+  label: string;
+  pulse?: boolean;
+  class?: string;
+}
+
+const { label, pulse = false, class: className = "" } = Astro.props;
+---
+
+<div class:list={["inline-flex items-center gap-2.5", className]}>
+  <span class:list={["gate-dot", pulse && "gate-dot-pulse"]} aria-hidden="true"></span>
+  <span class="font-data text-xs font-medium uppercase tracking-[0.2em] text-starlight">
+    {label}
+  </span>
+</div>

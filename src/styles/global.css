@@ -1,37 +1,107 @@
 @import "tailwindcss";
+@import "@fontsource/archivo/400.css";
+@import "@fontsource/archivo/500.css";
 @import "@fontsource/archivo/800.css";
-@import "@fontsource/archivo/900.css";
-@import "@fontsource/source-serif-4/400.css";
-@import "@fontsource/source-serif-4/600.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 
 @theme {
-  --color-paper: #f7f5f0;
-  --color-ink: #14120f;
-  --color-muted: #6e675c;
-  --color-rule: #dad5ca;
-  --color-stamp: #c22f2a;
+  --color-void: #0a0c12;
+  --color-panel: #11141d;
+  --color-line: #232838;
+  --color-starlight: #edf0f7;
+  --color-dim: #8b93a7;
+  --color-violet: #7c5cff;
+  --color-cyan: #4fd8ff;
+  --color-gate: #3fe08c;
 
   --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Source Serif 4", ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 @layer base {
   html {
-    @apply bg-paper text-ink antialiased;
+    @apply bg-void text-starlight antialiased;
+    color-scheme: dark;
     scroll-behavior: smooth;
   }
 
   body {
-    @apply font-body text-lg leading-relaxed;
+    @apply font-body text-[18px] font-normal leading-relaxed text-starlight;
   }
 
   ::selection {
-    @apply bg-stamp/15;
+    background: color-mix(in srgb, var(--color-violet) 22%, transparent);
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-stamp;
+    @apply outline-2 outline-offset-2 outline-starlight;
+  }
+
+  a {
+    transition:
+      color 200ms ease,
+      opacity 200ms ease,
+      text-decoration-color 200ms ease;
+  }
+
+  button {
+    transition: opacity 200ms ease;
+  }
+}
+
+@layer components {
+  .cta {
+    display: inline-block;
+    border: 0;
+    border-radius: 4px;
+    background: linear-gradient(105deg, var(--color-violet) 0%, var(--color-cyan) 100%);
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-void);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .cta:hover {
+    opacity: 0.88;
+  }
+
+  .panel {
+    position: relative;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+  }
+
+  .panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  }
+
+  .link {
+    @apply text-starlight underline decoration-line underline-offset-4 hover:decoration-starlight;
+  }
+
+  .article-body {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--color-starlight);
+  }
+
+  .article-body h2 {
+    @apply pt-6 font-display text-2xl font-extrabold uppercase tracking-wide text-starlight;
   }
 }
 
@@ -50,11 +120,13 @@
   }
 
   .eyebrow {
-    @apply font-display text-xs font-black uppercase tracking-[0.2em] text-muted;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    @apply text-xs font-medium uppercase tracking-[0.22em] text-dim;
   }
 
   .section-rule {
-    @apply border-t border-rule;
+    @apply border-t border-line;
   }
 
   .prose-width {
@@ -66,23 +138,88 @@
   }
 }
 
-@keyframes stamp-thunk {
-  0% {
-    transform: rotate(-4deg) scale(1.15);
-    opacity: 0.85;
-  }
+/* 1. Aurora drift — homepage hero only */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-violet,
+.aurora-cyan {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+
+.aurora-violet {
+  top: -28%;
+  left: -12%;
+  width: min(70vw, 820px);
+  height: min(70vw, 820px);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-violet) 28%, transparent) 0%, transparent 68%);
+  animation: aurora-drift 72s ease-in-out infinite;
+}
+
+.aurora-cyan {
+  right: -18%;
+  bottom: -36%;
+  width: min(62vw, 720px);
+  height: min(62vw, 720px);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-cyan) 20%, transparent) 0%, transparent 70%);
+  animation: aurora-drift 84s ease-in-out infinite reverse;
+}
+
+.aurora-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.14;
+}
+
+@keyframes aurora-drift {
+  0%,
   100% {
-    transform: rotate(-4deg) scale(1);
-    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6%, 5%) scale(1.06);
   }
 }
 
-.stamp-animate {
-  animation: stamp-thunk 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* 2. Gate-light pulse — the dot only */
+.gate-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-gate);
+  box-shadow: 0 0 8px 2px color-mix(in srgb, var(--color-gate) 42%, transparent);
+}
+
+.gate-dot-pulse {
+  animation: gate-pulse 3s ease-in-out infinite;
+}
+
+@keyframes gate-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stamp-animate {
+  .aurora-violet,
+  .aurora-cyan,
+  .gate-dot-pulse {
     animation: none;
   }
 }

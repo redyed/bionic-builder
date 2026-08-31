@@ -3,7 +3,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 const onSetups = currentPath === "/setups" || currentPath.startsWith("/setups/");
 ---
 
-<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2">
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-panel focus:px-4 focus:py-2 focus:text-starlight">
   Skip to content
 </a>
 
@@ -11,7 +11,7 @@ const onSetups = currentPath === "/setups" || currentPath.startsWith("/setups/")
   <nav class="flex items-center justify-between" aria-label="Main">
     <a
       href="/"
-      class="flex items-center gap-2 font-display text-sm font-black uppercase tracking-[0.15em] text-ink no-underline hover:text-stamp"
+      class="flex items-center gap-2 font-display text-sm font-extrabold uppercase tracking-[0.15em] text-starlight no-underline hover:opacity-80"
     >
       <img
         src="/images/logo-mark.svg"
@@ -28,8 +28,8 @@ const onSetups = currentPath === "/setups" || currentPath.startsWith("/setups/")
         <a
           href="/setups"
           class:list={[
-            "font-display text-sm font-black uppercase tracking-wider no-underline hover:text-stamp",
-            currentPath === "/setups" || onSetups ? "text-stamp" : "text-ink",
+            "font-display text-sm font-extrabold uppercase tracking-wider no-underline hover:opacity-80",
+            currentPath === "/setups" || onSetups ? "text-starlight" : "text-dim",
           ]}
         >
           Setups
@@ -39,8 +39,8 @@ const onSetups = currentPath === "/setups" || currentPath.startsWith("/setups/")
         <a
           href="/now"
           class:list={[
-            "font-display text-sm font-black uppercase tracking-wider no-underline hover:text-stamp",
-            currentPath === "/now" ? "text-stamp" : "text-ink",
+            "font-display text-sm font-extrabold uppercase tracking-wider no-underline hover:opacity-80",
+            currentPath === "/now" ? "text-starlight" : "text-dim",
           ]}
         >
           Now

@@ -13,11 +13,11 @@ const { id, weekOf, subtitle, rows } = Astro.props;
 
 <section id={id} class="scroll-mt-8">
   <header class="section-rule py-4">
-    <h2 class="font-data text-sm uppercase tracking-wider text-ink">
+    <h2 class="font-data text-sm uppercase tracking-wider text-starlight">
       Week of {weekOf}
     </h2>
     {subtitle && (
-      <p class="mt-1 font-body text-base text-muted">{subtitle}</p>
+      <p class="mt-1 font-body text-base text-dim">{subtitle}</p>
     )}
   </header>
   {rows.map((row) => (

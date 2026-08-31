@@ -9,6 +9,7 @@ interface Props {
   figureClass?: string;
   imgClass?: string;
   imgStyle?: string;
+  framed?: boolean;
 }
 
 const {
@@ -21,21 +22,24 @@ const {
   figureClass,
   imgClass = "block h-auto w-full",
   imgStyle,
+  framed = false,
 } = Astro.props;
 ---
 
 <figure class={figureClass}>
-  <img
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    loading={loading}
-    class={imgClass}
-    style={imgStyle}
-  />
+  <div class:list={[framed && "panel overflow-hidden p-0"]}>
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      class:list={[imgClass, framed && "rounded-[7px]"]}
+      style={imgStyle}
+    />
+  </div>
   {caption && (
-    <figcaption class="mt-2 text-center font-body text-sm text-muted">
+    <figcaption class="mt-2 text-center font-body text-sm text-dim">
       {caption}
     </figcaption>
   )}

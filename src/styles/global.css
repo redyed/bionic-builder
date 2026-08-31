@@ -932,7 +932,7 @@
   z-index: 60;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 260ms ease;
+  transition: opacity 460ms ease-out;
   background:
     radial-gradient(
       120% 90% at 50% 0%,
@@ -952,7 +952,7 @@
   z-index: 61;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 220ms ease;
+  transition: opacity 560ms ease-out;
 }
 
 #page-route-log {

@@ -2,7 +2,11 @@ const GLYPHS =
   "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホミムメモヤユヨラリルレロワヲﾝ0123456789ABCDEF◂▸/=+*";
 
 const CELL = 14;
-const RAIN_MS = 1500;
+
+// After the clear beat the columns stop respawning and the loop keeps running
+// through the opacity ramp, so the rain thins out instead of being cut off.
+const FADE_MS = 560;
+const TAIL_MS = FADE_MS + 60;
 
 // Beat 1 holds the veil and rain at full while the swap happens underneath.
 // Beat 2 drops both back and lets the page decode through. Beat 3 clears.
@@ -76,6 +80,8 @@ function frame(now: number): void {
     return;
   }
 
+  const dissolving = now - rainStart >= CLEAR_AT_MS;
+
   // The veil supplies the dark ground, so the trail paints the void colour
   // rather than erasing — that is what gives the columns their density.
   ctx.fillStyle = "rgba(10, 12, 18, 0.28)";
@@ -95,7 +101,9 @@ function frame(now: number): void {
 
     drops[i] += 1.4 + Math.random() * 0.9;
 
-    if (drops[i] * CELL > viewHeight + CELL * 8) {
+    // Once the dissolve starts, let each column run off the bottom and stay
+    // gone; the field thins as the trail keeps erasing behind it.
+    if (drops[i] * CELL > viewHeight + CELL * 8 && !dissolving) {
       drops[i] = -Math.random() * 20;
     }
   }
@@ -229,7 +237,7 @@ function startRain(path: string): void {
 
   clearBeats();
   rainStart = performance.now();
-  runUntil = rainStart + RAIN_MS;
+  runUntil = rainStart + CLEAR_AT_MS + TAIL_MS;
 
   canvas.style.opacity = "1";
   veil.style.opacity = "1";
@@ -244,6 +252,14 @@ function startRain(path: string): void {
   if (!frameHandle) {
     measure();
     frameHandle = requestAnimationFrame(frame);
+  } else {
+    // Columns parked below the fold by a dissolve would stay gone otherwise,
+    // leaving the field sparse for the next trip.
+    for (let i = 0; i < drops.length; i += 1) {
+      if (drops[i] * CELL > viewHeight) {
+        drops[i] = -Math.random() * 20;
+      }
+    }
   }
 }
 

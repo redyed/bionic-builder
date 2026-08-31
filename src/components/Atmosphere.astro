@@ -1,0 +1,34 @@
+---
+interface Props {
+  variant?: "balanced" | "violet-heavy" | "cyan-heavy";
+  backdrop?: string;
+  backdropPosition?: string;
+  class?: string;
+}
+
+const {
+  variant = "balanced",
+  backdrop,
+  backdropPosition = "center center",
+  class: className = "",
+} = Astro.props;
+---
+
+<div
+  class:list={["atmosphere", className]}
+  data-variant={variant}
+  aria-hidden="true"
+>
+  {backdrop && (
+    <div
+      class="atmosphere-backdrop"
+      style={{
+        backgroundImage: `linear-gradient(180deg, var(--color-void) 0%, transparent 30%, transparent 70%, var(--color-void) 100%), url(${backdrop})`,
+        backgroundPosition: `center, ${backdropPosition}`,
+      }}
+    />
+  )}
+  <div class="atmosphere-glow atmosphere-glow-violet" />
+  <div class="atmosphere-glow atmosphere-glow-cyan" />
+  <div class="atmosphere-fade" />
+</div>

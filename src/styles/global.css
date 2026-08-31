@@ -106,8 +106,8 @@
       rgba(255, 255, 255, 0.02) 62%,
       color-mix(in srgb, var(--color-violet) 4%, rgba(255, 255, 255, 0.01)) 100%
     );
-    backdrop-filter: blur(16px) saturate(1.2);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(10px) saturate(1.15);
+    -webkit-backdrop-filter: blur(10px) saturate(1.15);
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-starlight) 18%, transparent);
     pointer-events: none;
     transition:
@@ -299,12 +299,14 @@
   }
 }
 
-/* Aurora atmosphere — reusable via Aurora.astro */
+/* Aurora atmosphere — hero only; animated blur is expensive */
 .aurora {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  contain: paint;
+  isolation: isolate;
 }
 
 .aurora-violet,
@@ -370,19 +372,78 @@
   );
 }
 
-.aurora-parallax-layer {
+/* Static atmosphere — no blur, no animation, cheap to scroll past */
+.atmosphere {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   pointer-events: none;
-  will-change: transform;
+  contain: strict;
 }
 
-.parallax-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  will-change: transform;
-  transform: scale(1.08);
+.atmosphere-backdrop {
+  position: absolute;
+  inset: 0;
+  opacity: 0.26;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.atmosphere-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.atmosphere-glow-violet {
+  top: -18%;
+  left: -8%;
+  width: min(58vw, 640px);
+  height: min(58vw, 640px);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-violet) var(--atmosphere-violet-strength, 16%), transparent) 0%,
+    transparent 72%
+  );
+}
+
+.atmosphere-glow-cyan {
+  right: -12%;
+  bottom: -22%;
+  width: min(52vw, 560px);
+  height: min(52vw, 560px);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-cyan) var(--atmosphere-cyan-strength, 12%), transparent) 0%,
+    transparent 72%
+  );
+}
+
+.atmosphere-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--color-void) 0%,
+    transparent 20%,
+    transparent 80%,
+    var(--color-void) 100%
+  );
+}
+
+.atmosphere[data-variant="violet-heavy"] {
+  --atmosphere-violet-strength: 22%;
+  --atmosphere-cyan-strength: 8%;
+}
+
+.atmosphere[data-variant="cyan-heavy"] {
+  --atmosphere-violet-strength: 10%;
+  --atmosphere-cyan-strength: 18%;
+}
+
+.atmosphere[data-variant="balanced"] {
+  --atmosphere-violet-strength: 16%;
+  --atmosphere-cyan-strength: 12%;
 }
 
 .aurora[data-intensity="full"] {
@@ -475,10 +536,16 @@
   .gate-dot-pulse {
     animation: none;
   }
+}
 
-  .aurora-parallax-layer,
-  .parallax-image {
-    transform: none !important;
-    will-change: auto;
+@media (max-width: 767px) {
+  .aurora-violet,
+  .aurora-cyan {
+    filter: blur(56px);
+  }
+
+  .btn-primary::before {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }

@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Aurora from "../components/Aurora.astro";
+import Atmosphere from "../components/Atmosphere.astro";
 import GateLight from "../components/GateLight.astro";
 import Figure from "../components/Figure.astro";
 import LedgerRow from "../components/LedgerRow.astro";
@@ -44,13 +45,12 @@ const schema = [
   schema={schema}
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden" data-parallax-root>
+  <section class="relative overflow-hidden">
     <Aurora
       intensity="full"
       variant="balanced"
       backdrop="/images/hero-backdrop.webp"
       backdropPosition="center 42%"
-      parallax={true}
     />
 
     <div class="wide-width relative mx-auto px-6 pb-20 pt-4">
@@ -149,7 +149,7 @@ const schema = [
 
   <!-- The shop floor -->
   <section class="section-rule relative overflow-hidden">
-    <Aurora intensity="low" variant="violet-heavy" grid={true} />
+    <Atmosphere variant="violet-heavy" />
 
     <div class="wide-width relative mx-auto px-6 py-16">
     <div class="prose-width">
@@ -159,16 +159,14 @@ const schema = [
       </p>
     </div>
 
-    <div class="panel mt-10 max-w-4xl overflow-hidden" data-parallax-image>
+    <div class="panel mt-10 max-w-4xl overflow-hidden">
       <img
         src="/images/shopfloor.webp"
         alt="Rows of automated workstations receding into a dark factory floor, lit by violet and cyan."
         width={1024}
         height={576}
         loading="lazy"
-        class="cinematic-img parallax-image"
-        data-parallax-image-target
-        data-parallax-speed="1"
+        class="cinematic-img"
       />
     </div>
 
@@ -242,8 +240,7 @@ const schema = [
 
   <!-- The setups -->
   <section class="section-rule relative overflow-hidden">
-    <Aurora
-      intensity="low"
+    <Atmosphere
       variant="balanced"
       backdrop="/images/setups-backdrop.webp"
       backdropPosition="center center"
@@ -267,7 +264,3 @@ const schema = [
 
   <EmailBlock />
 </Layout>
-
-<script>
-  import "../scripts/parallax.ts";
-</script>

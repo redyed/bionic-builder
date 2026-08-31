@@ -20,7 +20,7 @@ const { id, weekOf, subtitle, rows } = Astro.props;
       <p class="mt-1 prose-dim">{subtitle}</p>
     )}
   </header>
-  {rows.map((row) => (
-    <LedgerRow label={row.label} value={row.value} />
+  {rows.map((row, index) => (
+    <LedgerRow label={row.label} value={row.value} index={index} />
   ))}
 </section>

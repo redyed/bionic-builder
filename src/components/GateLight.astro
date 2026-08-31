@@ -5,7 +5,7 @@ interface Props {
   class?: string;
 }
 
-const { label, pulse = false, class: className = "" } = Astro.props;
+const { label, pulse = true, class: className = "" } = Astro.props;
 ---
 
 <div class:list={["inline-flex items-center gap-2.5", className]}>

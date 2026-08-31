@@ -2,21 +2,31 @@
 interface Props {
   label: string;
   value?: string;
+  countTo?: number;
+  countPrefix?: string;
+  countSuffix?: string;
+  countDecimals?: number;
   muted?: boolean;
   href?: string;
   labelHref?: string;
   suffix?: string;
   suffixHref?: string;
+  index?: number;
 }
 
 const {
   label,
   value,
+  countTo,
+  countPrefix = "",
+  countSuffix = "",
+  countDecimals = 0,
   muted = false,
   href,
   labelHref,
   suffix,
   suffixHref,
+  index = 0,
 } = Astro.props;
 
 const linkClass = "link";
@@ -26,7 +36,10 @@ function externalAttrs(url?: string) {
 }
 ---
 
-<div class:list={["section-rule flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between", muted && "text-dim"]}>
+<div
+  class:list={["ledger-row flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between", muted && "text-dim"]}
+  style={`--i: ${index}`}
+>
   <span class:list={["font-body text-[17px] font-normal", muted ? "text-dim" : "text-starlight"]}>
     {labelHref ? (
       <>
@@ -45,7 +58,17 @@ function externalAttrs(url?: string) {
     )}
   </span>
   {value && (
-    <span class:list={["font-data shrink-0 text-sm sm:text-right", muted ? "text-dim" : "text-cyan"]}>
+    <span
+      class:list={["font-data shrink-0 text-sm sm:text-right", muted ? "text-dim" : "text-cyan"]}
+      {...(countTo !== undefined
+        ? {
+            "data-count": String(countTo),
+            "data-count-prefix": countPrefix,
+            "data-count-suffix": countSuffix,
+            "data-count-decimals": String(countDecimals),
+          }
+        : {})}
+    >
       {value}
     </span>
   )}

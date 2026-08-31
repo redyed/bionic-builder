@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Aurora from "../components/Aurora.astro";
 import Atmosphere from "../components/Atmosphere.astro";
 import GateLight from "../components/GateLight.astro";
+import BootHeadline from "../components/BootHeadline.astro";
 import Figure from "../components/Figure.astro";
 import LedgerRow from "../components/LedgerRow.astro";
 import EmailBlock from "../components/EmailBlock.astro";
@@ -54,26 +55,27 @@ const schema = [
     />
 
     <div class="wide-width relative mx-auto px-6 pb-20 pt-4">
-      <p class="eyebrow">Bionic Builder</p>
-      <h1 class="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-starlight sm:text-5xl lg:text-6xl">
-        Your company runs while the laptop is closed.
-      </h1>
-      <p class="prose-lead-lg mt-6 max-w-2xl">
+      <p class="eyebrow hud-enter hud-d1">Bionic Builder</p>
+      <BootHeadline
+        text="Your company runs while the laptop is closed."
+        class="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-starlight sm:text-5xl lg:text-6xl"
+      />
+      <p class="prose-lead-lg hud-enter hud-d3 mt-6 max-w-2xl">
         AI employees ship the publications, courses, and software.<br />
         No staff.
       </p>
-      <p class="prose-dim mt-3">
+      <p class="prose-dim hud-enter hud-d4 mt-3">
         You keep the judgment.
       </p>
-      <div class="mt-8 flex flex-wrap items-center gap-6">
+      <div class="hud-enter hud-d5 mt-8 flex flex-wrap items-center gap-6">
         <a href="/setups" class="btn-primary">
           Read the setups
         </a>
-        <GateLight label="Signed · D.C." pulse={true} />
+        <GateLight label="Signed · D.C." />
       </div>
 
-      <p class="prose-dim prose-width mt-12">
-        Built and run by Deyder Cintron — producer, <span class="telemetry">4×</span> Grammy-nominated records, <span class="telemetry">2.2B</span> streams. The org ships the companies. He signs what can be quoted.
+      <p class="prose-dim prose-width hud-enter hud-d6 mt-12">
+        Built and run by Deyder Cintron — producer, <span class="telemetry" data-count="4" data-count-suffix="×" data-count-delay="1400">4×</span> Grammy-nominated records, <span class="telemetry" data-count="2.2" data-count-decimals="1" data-count-suffix="B" data-count-delay="1520">2.2B</span> streams. The org ships the companies. He signs what can be quoted.
       </p>
     </div>
   </section>
@@ -94,7 +96,7 @@ const schema = [
   <!-- What the employees are for -->
   <section class="wide-width mx-auto px-6 py-16">
     <div class="grid gap-6 md:grid-cols-3">
-      <article class="panel overflow-hidden">
+      <article class="panel panel-glass reveal-on-scroll overflow-hidden" style="--reveal-delay: 0ms">
         <img
           src="/images/card-publish.webp"
           alt=""
@@ -111,7 +113,7 @@ const schema = [
         </div>
       </article>
 
-      <article class="panel overflow-hidden">
+      <article class="panel panel-glass reveal-on-scroll overflow-hidden" style="--reveal-delay: 90ms">
         <img
           src="/images/card-product.webp"
           alt=""
@@ -128,7 +130,7 @@ const schema = [
         </div>
       </article>
 
-      <article class="panel overflow-hidden">
+      <article class="panel panel-glass reveal-on-scroll overflow-hidden" style="--reveal-delay: 180ms">
         <img
           src="/images/card-operate.webp"
           alt=""
@@ -152,23 +154,26 @@ const schema = [
     <Atmosphere variant="violet-heavy" />
 
     <div class="wide-width relative mx-auto px-6 py-16">
-    <div class="prose-width">
+    <div class="prose-width reveal-on-scroll">
       <p class="eyebrow">The shop floor</p>
       <p class="prose-lead mt-6">
-        Not a prompt library. An organization — <span class="telemetry">31 seats</span> across <span class="telemetry">ten</span> AI labs, run like a company because it is one.
+        Not a prompt library. An organization — <span class="telemetry" data-count="31" data-count-suffix=" seats">31 seats</span> across <span class="telemetry" data-count="10">10</span> AI labs, run like a company because it is one.
       </p>
     </div>
 
-    <div class="panel mt-10 max-w-4xl overflow-hidden">
-      <img
-        src="/images/shopfloor.webp"
-        alt="Rows of automated workstations receding into a dark factory floor, lit by violet and cyan."
-        width={1024}
-        height={576}
-        loading="lazy"
-        class="cinematic-img"
-      />
-    </div>
+    <figure class="shopfloor-frame mt-10">
+      <div class="shopfloor">
+        <img
+          src="/images/shopfloor.webp"
+          alt="Rows of automated workstations receding into a dark factory floor, lit by violet and cyan."
+          width={1024}
+          height={576}
+          loading="lazy"
+          class="shopfloor-img"
+        />
+        <span class="shopfloor-beam" aria-hidden="true"></span>
+      </div>
+    </figure>
 
     <div class="mt-10 max-w-3xl">
       <div class="section-rule py-4">
@@ -204,20 +209,32 @@ const schema = [
 
     <div class="mt-8 max-w-3xl">
       <LedgerRow
+        index={0}
         label="The Sovereign Producer — a magazine that publishes"
         labelHref="https://thesovereignproducer.com"
         suffix="— that operation is Setup №2"
         suffixHref="/setups/the-magazine-that-publishes-itself"
       />
       <LedgerRow
+        index={1}
         label="Tracked Vocals — a working directory, built in 4 days"
         labelHref="https://trackedvocals.com"
         suffix="— that build is Setup №1"
         suffixHref="/setups/done-is-a-url"
         value="4 days"
+        countTo={4}
+        countSuffix=" days"
       />
-      <LedgerRow label="The whole org" value="≈ $170 / month" />
       <LedgerRow
+        index={2}
+        label="The whole org"
+        value="≈ $170 / month"
+        countTo={170}
+        countPrefix="≈ $"
+        countSuffix=" / month"
+      />
+      <LedgerRow
+        index={3}
         label="The older receipts — 4× Grammy-nominated records · 2.2B streams"
         muted={true}
       />
@@ -239,15 +256,17 @@ const schema = [
   </section>
 
   <!-- The setups -->
-  <section class="section-rule relative overflow-hidden">
+  <section class="section-rule setups-cinematic relative overflow-hidden">
     <Atmosphere
       variant="balanced"
       backdrop="/images/setups-backdrop.webp"
-      backdropPosition="center center"
+      backdropPosition="center 38%"
+      backdropOpacity={0.46}
+      prominent={true}
     />
 
-    <div class="wide-width relative mx-auto px-6 py-16">
-    <div class="prose-width">
+    <div class="wide-width relative mx-auto flex min-h-[inherit] items-center px-6 py-20 md:py-24">
+    <div class="prose-width reveal-on-scroll">
       <h2 class="font-display text-3xl font-extrabold uppercase tracking-wide text-starlight">The setups</h2>
       <p class="prose-lead mt-6">
         Every setup used to run the shop. Jobs, handoffs, what breaks, and what never gets handed to a bot.
@@ -264,3 +283,8 @@ const schema = [
 
   <EmailBlock />
 </Layout>
+
+<script>
+  import "../scripts/reveal-on-scroll.ts";
+  import "../scripts/shopfloor-scroll.ts";
+</script>

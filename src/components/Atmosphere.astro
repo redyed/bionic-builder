@@ -3,6 +3,8 @@ interface Props {
   variant?: "balanced" | "violet-heavy" | "cyan-heavy";
   backdrop?: string;
   backdropPosition?: string;
+  backdropOpacity?: number;
+  prominent?: boolean;
   class?: string;
 }
 
@@ -10,12 +12,14 @@ const {
   variant = "balanced",
   backdrop,
   backdropPosition = "center center",
+  backdropOpacity = 0.26,
+  prominent = false,
   class: className = "",
 } = Astro.props;
 ---
 
 <div
-  class:list={["atmosphere", className]}
+  class:list={["atmosphere", prominent && "atmosphere--prominent", className]}
   data-variant={variant}
   aria-hidden="true"
 >
@@ -25,6 +29,7 @@ const {
       style={{
         backgroundImage: `linear-gradient(180deg, var(--color-void) 0%, transparent 30%, transparent 70%, var(--color-void) 100%), url(${backdrop})`,
         backgroundPosition: `center, ${backdropPosition}`,
+        opacity: String(backdropOpacity),
       }}
     />
   )}

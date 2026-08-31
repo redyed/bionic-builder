@@ -1,0 +1,23 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+}
+
+const { text, class: className = "" } = Astro.props;
+const words = text.split(/\s+/);
+---
+
+<h1 class:list={["boot-headline", className]}>
+  <span class="boot-scan" aria-hidden="true"></span>
+  {
+    words.map((word, index) => (
+      <>
+        {index > 0 && " "}
+        <span class="boot-word" style={`--i: ${index}`}>
+          <span>{word}</span>
+        </span>
+      </>
+    ))
+  }
+</h1>

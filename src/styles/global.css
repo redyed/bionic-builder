@@ -79,6 +79,9 @@
 
   .btn-primary {
     position: relative;
+    overflow: hidden;
+    --mx: 50%;
+    --my: 50%;
     background: transparent;
     border: 1px solid color-mix(in srgb, var(--color-starlight) 24%, transparent);
     border-radius: 1px;
@@ -91,7 +94,8 @@
     font-variant-numeric: tabular-nums;
     transition:
       border-color 220ms ease,
-      box-shadow 220ms ease;
+      box-shadow 220ms ease,
+      transform 120ms ease;
   }
 
   .btn-primary::before {
@@ -115,6 +119,20 @@
       box-shadow 220ms ease;
   }
 
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 260ms ease;
+    background: radial-gradient(
+      180px circle at var(--mx) var(--my),
+      color-mix(in srgb, var(--color-cyan) 22%, transparent),
+      transparent 60%
+    );
+  }
+
   .btn-primary:hover {
     border-color: color-mix(in srgb, var(--color-cyan) 42%, var(--color-starlight));
     box-shadow:
@@ -136,7 +154,12 @@
       inset 0 0 18px color-mix(in srgb, var(--color-cyan) 5%, transparent);
   }
 
+  .btn-primary:hover::after {
+    opacity: 1;
+  }
+
   .btn-primary:active {
+    transform: translateY(1px);
     border-color: color-mix(in srgb, var(--color-starlight) 18%, transparent);
     box-shadow:
       0 0 8px color-mix(in srgb, var(--color-cyan) 4%, transparent),
@@ -216,6 +239,47 @@
     height: 1px;
     border-radius: 8px 8px 0 0;
     background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+    transition: opacity 220ms ease;
+  }
+
+  .panel-glass {
+    isolation: isolate;
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+
+  .panel-glass .card-cinematic {
+    transition:
+      transform 420ms ease,
+      opacity 220ms ease;
+  }
+
+  @media (hover: hover) {
+    .panel-glass:hover {
+      border-color: color-mix(in srgb, var(--color-cyan) 34%, var(--color-line));
+      box-shadow:
+        0 12px 36px color-mix(in srgb, var(--color-void) 55%, transparent),
+        0 0 24px color-mix(in srgb, var(--color-cyan) 10%, transparent),
+        -1px 0 0 color-mix(in srgb, var(--color-violet) 14%, transparent),
+        1px 0 0 color-mix(in srgb, var(--color-cyan) 14%, transparent);
+      transform: translateY(-3px);
+    }
+
+    .panel-glass:hover::before {
+      opacity: 1;
+      background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--color-violet) 80%, var(--color-starlight)),
+        color-mix(in srgb, var(--color-cyan) 80%, var(--color-starlight))
+      );
+    }
+
+    .panel-glass:hover .card-cinematic {
+      transform: scale(1.04);
+      opacity: 1;
+    }
   }
 
   .prose-lead {
@@ -446,6 +510,30 @@
   --atmosphere-cyan-strength: 12%;
 }
 
+.atmosphere--prominent .atmosphere-fade {
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-void) 0%,
+      color-mix(in srgb, var(--color-void) 55%, transparent) 10%,
+      transparent 42%,
+      transparent 58%,
+      color-mix(in srgb, var(--color-void) 55%, transparent) 90%,
+      var(--color-void) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--color-void) 0%,
+      transparent 20%,
+      transparent 80%,
+      var(--color-void) 100%
+    );
+}
+
+.setups-cinematic {
+  min-height: min(58vh, 560px);
+}
+
 .aurora[data-intensity="full"] {
   --aurora-blob-opacity: 1;
   --aurora-grid-opacity: 0.14;
@@ -495,6 +583,92 @@
   opacity: 0.88;
 }
 
+.shopfloor-frame {
+  position: relative;
+  margin-inline: auto;
+  max-width: 100%;
+  overflow: clip;
+  border: 1px solid color-mix(in srgb, var(--color-line) 88%, var(--color-cyan));
+  border-radius: 8px;
+  box-shadow:
+    0 28px 56px color-mix(in srgb, var(--color-void) 72%, transparent),
+    0 0 32px color-mix(in srgb, var(--color-violet) 8%, transparent),
+    -1px 0 0 color-mix(in srgb, var(--color-violet) 12%, transparent),
+    1px 0 0 color-mix(in srgb, var(--color-cyan) 12%, transparent);
+}
+
+.shopfloor {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  --p: 0;
+}
+
+.shopfloor-beam {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(-140px + var(--p) * (100% + 140px));
+  z-index: 3;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--color-cyan) 24%, transparent),
+    transparent
+  );
+}
+
+.shopfloor img {
+  transform: scale(1.08) translateY(calc(-4% + var(--p) * 8%));
+}
+
+.shopfloor-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-violet) 85%, var(--color-starlight)),
+    color-mix(in srgb, var(--color-cyan) 85%, var(--color-starlight))
+  );
+}
+
+.shopfloor-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-void) 48%, transparent) 0%,
+      transparent 28%,
+      transparent 68%,
+      color-mix(in srgb, var(--color-void) 62%, transparent) 100%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-violet) 14%, transparent) 0%,
+      transparent 32%,
+      transparent 68%,
+      color-mix(in srgb, var(--color-cyan) 12%, transparent) 100%
+    );
+}
+
+.shopfloor-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  filter: contrast(1.07) saturate(1.1);
+}
+
 @keyframes aurora-drift {
   0%,
   100% {
@@ -505,8 +679,9 @@
   }
 }
 
-/* 2. Gate-light pulse — the dot only */
+/* 2. Gate-light emit — ripple rings from the dot */
 .gate-dot {
+  position: relative;
   display: inline-block;
   width: 7px;
   height: 7px;
@@ -516,25 +691,224 @@
   box-shadow: 0 0 8px 2px color-mix(in srgb, var(--color-gate) 42%, transparent);
 }
 
-.gate-dot-pulse {
-  animation: gate-pulse 3s ease-in-out infinite;
+.gate-dot-pulse::before,
+.gate-dot-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-gate);
+  animation: gate-emit 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-@keyframes gate-pulse {
-  0%,
+.gate-dot-pulse::after {
+  animation-delay: 1.3s;
+}
+
+@keyframes gate-emit {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
   100% {
+    transform: scale(6.5);
+    opacity: 0;
+  }
+}
+
+/* HUD boot — hero load sequence */
+@keyframes hud-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hud-enter {
+  --hud-delay: 0ms;
+  opacity: 0;
+  animation: hud-enter 640ms cubic-bezier(0.16, 1, 0.3, 1) var(--hud-delay) forwards;
+}
+
+.hud-d1 { --hud-delay: 0ms; }
+.hud-d3 { --hud-delay: 520ms; }
+.hud-d4 { --hud-delay: 610ms; }
+.hud-d5 { --hud-delay: 700ms; }
+.hud-d6 { --hud-delay: 820ms; }
+
+.boot-headline {
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.boot-scan {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 120px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-cyan) 26%, transparent),
+    transparent
+  );
+  animation: boot-scan 1900ms cubic-bezier(0.37, 0, 0.24, 1) 120ms both;
+}
+
+.boot-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.boot-word > span {
+  display: inline-block;
+  animation: boot-rise 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+@keyframes boot-rise {
+  from {
+    transform: translateY(110%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes boot-scan {
+  0% {
+    transform: translateX(-140px);
+    opacity: 0;
+  }
+
+  10%,
+  90% {
     opacity: 1;
   }
-  50% {
-    opacity: 0.4;
+
+  100% {
+    transform: translateX(100cqw);
+    opacity: 0;
   }
+}
+
+.telemetry[data-count] {
+  display: inline-block;
+  min-width: 0.5ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger-row {
+  position: relative;
+}
+
+.ledger-row::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--color-line);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i) * 90ms);
+}
+
+.ledger-row span {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.6s ease calc(var(--i) * 90ms + 160ms),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i) * 90ms + 160ms);
+}
+
+.ledger-row.is-in::before {
+  transform: scaleX(1);
+}
+
+.ledger-row.is-in span {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .aurora-violet,
   .aurora-cyan,
-  .gate-dot-pulse {
+  .gate-dot-pulse::before,
+  .gate-dot-pulse::after {
     animation: none;
+  }
+
+  .hud-enter {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .boot-word > span {
+    animation: none;
+    transform: none;
+  }
+
+  .boot-scan {
+    animation: none;
+    opacity: 0;
+  }
+
+  .ledger-row::before,
+  .ledger-row span {
+    transition: none;
+  }
+
+  .ledger-row span {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ledger-row::before {
+    transform: scaleX(1);
+  }
+
+  .shopfloor-beam {
+    opacity: 0;
+    transform: translateY(-140px);
+  }
+
+  .shopfloor img {
+    transform: none;
   }
 }
 

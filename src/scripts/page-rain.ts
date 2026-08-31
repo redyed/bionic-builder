@@ -105,18 +105,26 @@ function frame(now: number): void {
   frameHandle = 0;
 }
 
-function decode(element: HTMLElement, delay: number): void {
+// The swapped-in DOM carries its real text, so blank the targets the moment
+// the swap lands. Waiting for the decode beat would show the finished line
+// first and then visibly un-write it.
+function mask(element: HTMLElement): void {
   const text = element.dataset.decodeText ?? element.textContent ?? "";
 
   // Cache the real text so a second pass never captures a scrambled frame.
   element.dataset.decodeText = text;
 
-  const characters = text.split("");
-  let revealed = -delay / 26;
-
   // The scramble tail is shorter than the final string, so hold the box open
   // to keep the rest of the page from jumping while the line resolves.
   element.style.minHeight = `${element.getBoundingClientRect().height}px`;
+  element.style.color = "var(--color-gate)";
+  element.textContent = "";
+}
+
+function decode(element: HTMLElement, delay: number): void {
+  const text = element.dataset.decodeText ?? element.textContent ?? "";
+  const characters = text.split("");
+  let revealed = -delay / 26;
 
   function step(): void {
     revealed += 0.9;
@@ -187,14 +195,17 @@ function resolveIncoming(): void {
 
   armed = false;
 
+  const targets = document.querySelectorAll<HTMLElement>("[data-decode]");
+  targets.forEach(mask);
+
   const elapsed = performance.now() - rainStart;
 
   beatTimers.push(
     window.setTimeout(
       () => {
-        document
-          .querySelectorAll<HTMLElement>("[data-decode]")
-          .forEach((element, index) => decode(element, index * DECODE_STAGGER_MS));
+        targets.forEach((element, index) =>
+          decode(element, index * DECODE_STAGGER_MS),
+        );
 
         if (canvas) canvas.style.opacity = "0.45";
         if (veil) veil.style.opacity = "0.35";

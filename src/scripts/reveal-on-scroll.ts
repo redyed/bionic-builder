@@ -39,4 +39,5 @@ export function initRevealOnScroll(): void {
   elements.forEach((element) => observer.observe(element));
 }
 
-initRevealOnScroll();
+// astro:page-load fires on the initial load and after every client-side swap.
+document.addEventListener("astro:page-load", initRevealOnScroll);

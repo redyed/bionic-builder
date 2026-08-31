@@ -124,11 +124,18 @@ function mask(element: HTMLElement): void {
 function decode(element: HTMLElement, delay: number): void {
   const text = element.dataset.decodeText ?? element.textContent ?? "";
   const characters = text.split("");
-  let revealed = -delay / 26;
 
-  function step(): void {
-    revealed += 0.9;
-    const landed = Math.floor(revealed);
+  // Drive the reveal from elapsed time, not a per-frame counter: a throttled
+  // or slow frame rate would otherwise stretch the decode past the curtain.
+  // Hold the design's cadence, but never overrun the clear beat — which is
+  // what left long headlines resolving in the open.
+  const cadenceMs = (characters.length / 0.9) * 16.7;
+  const budgetMs = Math.max(240, CLEAR_AT_MS - DECODE_AT_MS - delay);
+  const durationMs = Math.min(cadenceMs, budgetMs);
+  const startAt = performance.now() + delay;
+
+  function step(now: number): void {
+    const landed = Math.floor(((now - startAt) / durationMs) * characters.length);
 
     if (landed < 0) {
       element.textContent = "";

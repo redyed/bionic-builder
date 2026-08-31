@@ -13,4 +13,5 @@ function initBtnPrimarySheen(): void {
   });
 }
 
-initBtnPrimarySheen();
+// astro:page-load fires on the initial load and after every client-side swap.
+document.addEventListener("astro:page-load", initBtnPrimarySheen);

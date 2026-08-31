@@ -137,5 +137,8 @@ export function initLedgerPrint(): void {
   rows.forEach((row) => observer.observe(row));
 }
 
-initTelemetryCount();
-initLedgerPrint();
+// astro:page-load fires on the initial load and after every client-side swap.
+document.addEventListener("astro:page-load", () => {
+  initTelemetryCount();
+  initLedgerPrint();
+});

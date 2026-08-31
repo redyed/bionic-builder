@@ -14,7 +14,14 @@ function progressForElement(element: HTMLElement): number {
   return Math.min(1, Math.max(0, (viewportHeight - rect.top) / range));
 }
 
+let detach: (() => void) | null = null;
+
 export function initShopfloorScroll(): void {
+  // Window listeners outlive a view transition, so drop the previous page's
+  // pair before wiring this one up.
+  detach?.();
+  detach = null;
+
   const blocks = document.querySelectorAll<HTMLElement>(".shopfloor");
   if (!blocks.length || prefersReducedMotion()) {
     return;
@@ -42,6 +49,12 @@ export function initShopfloorScroll(): void {
   update();
   window.addEventListener("scroll", scheduleUpdate, { passive: true });
   window.addEventListener("resize", scheduleUpdate, { passive: true });
+
+  detach = () => {
+    window.removeEventListener("scroll", scheduleUpdate);
+    window.removeEventListener("resize", scheduleUpdate);
+  };
 }
 
-initShopfloorScroll();
+// astro:page-load fires on the initial load and after every client-side swap.
+document.addEventListener("astro:page-load", initShopfloorScroll);

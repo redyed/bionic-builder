@@ -19,12 +19,14 @@ function updateParallaxRoots(roots: NodeListOf<HTMLElement>, intensity: number):
 
     const viewportRatio =
       (rect.top + height * 0.5 - window.innerHeight * 0.5) / window.innerHeight;
-    const maxPx = Math.min(height * 0.1, 72) * intensity;
+    const scrollProgress = Math.max(0, Math.min(1, (-rect.top) / Math.max(height * 0.75, 1)));
+    const blend = scrollProgress * 0.65 + viewportRatio * 0.35;
+    const maxPx = Math.min(height * 0.18, 120) * intensity;
 
     root.querySelectorAll<ParallaxLayer>("[data-parallax-speed]").forEach((layer) => {
       const speed = layer._parallaxSpeed ?? Number.parseFloat(layer.dataset.parallaxSpeed ?? "1");
       layer._parallaxSpeed = speed;
-      const y = viewportRatio * maxPx * speed;
+      const y = blend * maxPx * speed;
       layer.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
     });
   });
@@ -43,12 +45,17 @@ function updateParallaxImages(images: NodeListOf<HTMLImageElement>, intensity: n
     }
 
     const speed = Number.parseFloat(image.dataset.parallaxSpeed ?? "1");
+    const scrollProgress = Math.max(
+      0,
+      Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)),
+    );
     const viewportRatio =
       (rect.top + rect.height * 0.5 - window.innerHeight * 0.5) / window.innerHeight;
-    const maxPx = 36 * intensity;
-    const y = viewportRatio * maxPx * speed;
+    const blend = scrollProgress * 0.7 + viewportRatio * 0.3;
+    const maxPx = 64 * intensity;
+    const y = (blend - 0.5) * 2 * maxPx * speed;
 
-    image.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(1.06)`;
+    image.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(1.08)`;
   });
 }
 
@@ -64,7 +71,7 @@ export function initParallax(): void {
     return;
   }
 
-  let intensity = isMobileViewport() ? 0.45 : 1;
+  let intensity = isMobileViewport() ? 0.65 : 1;
   let ticking = false;
 
   const update = () => {
@@ -104,7 +111,7 @@ export function initParallax(): void {
   };
 
   const onViewportChange = () => {
-    intensity = isMobileViewport() ? 0.45 : 1;
+    intensity = isMobileViewport() ? 0.65 : 1;
     requestUpdate();
   };
 

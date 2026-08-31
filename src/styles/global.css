@@ -382,7 +382,7 @@
   width: 100%;
   height: auto;
   will-change: transform;
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .aurora[data-intensity="full"] {
@@ -393,17 +393,17 @@
 }
 
 .aurora[data-intensity="low"] {
-  --aurora-blob-opacity: 0.48;
-  --aurora-grid-opacity: 0.08;
-  --aurora-fade-in: 18%;
-  --aurora-fade-out: 82%;
+  --aurora-blob-opacity: 0.62;
+  --aurora-grid-opacity: 0.11;
+  --aurora-fade-in: 16%;
+  --aurora-fade-out: 84%;
 }
 
 .aurora[data-intensity="whisper"] {
-  --aurora-blob-opacity: 0.24;
-  --aurora-grid-opacity: 0.06;
-  --aurora-fade-in: 14%;
-  --aurora-fade-out: 86%;
+  --aurora-blob-opacity: 0.38;
+  --aurora-grid-opacity: 0.09;
+  --aurora-fade-in: 12%;
+  --aurora-fade-out: 88%;
 }
 
 .aurora[data-variant="violet-heavy"] {
